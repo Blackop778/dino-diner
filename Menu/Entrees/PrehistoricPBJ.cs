@@ -1,16 +1,27 @@
-﻿using System.Collections.Generic;
+﻿/* PrehistoricPBJ.cs
+ * Author: Nathan Bean
+ * Modified by: Nathan Faltermeier
+ */
+
+using System.Collections.Generic;
 
 namespace DinoDiner.Menu.Entrees
 {
-    public class PrehistoricPBJ
+    public class PrehistoricPBJ : AbstractMenuItem
     {
+        /// <summary>
+        /// Whether or not the ingredient is included in the entree
+        /// </summary>
         private bool peanutButter = true;
+        /// <summary>
+        /// Whether or not the ingredient is included in the entree
+        /// </summary>
         private bool jelly = true;
 
-        public double Price { get; set; }
-        public uint Calories { get; set; }
-
-        public List<string> Ingredients
+        /// <summary>
+        /// The ingredients in the entree with the current holdings
+        /// </summary>
+        public override List<string> Ingredients
         {
             get
             {
@@ -21,17 +32,26 @@ namespace DinoDiner.Menu.Entrees
             }
         }
 
+        /// <summary>
+        /// Creates a default Prehistoric PB&J
+        /// </summary>
         public PrehistoricPBJ()
         {
             this.Price = 6.52;
             this.Calories = 483;
         }
 
+        /// <summary>
+        /// Removes the ingredient from the entree
+        /// </summary>
         public void HoldPeanutButter()
         {
             this.peanutButter = false;
         }
 
+        /// <summary>
+        /// Removes the ingredient from the entree
+        /// </summary>
         public void HoldJelly()
         {
             this.jelly = false;
