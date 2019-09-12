@@ -66,7 +66,7 @@ namespace DinoDiner.Menu.Entrees
         /// <summary>
         /// Removes the ingredient from the entree
         /// </summary>
-        public void holdCheese()
+        public void HoldCheese()
         {
             this.cheese = false;
         }
