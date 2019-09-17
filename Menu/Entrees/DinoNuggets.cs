@@ -27,19 +27,14 @@ namespace DinoDiner.Menu.Entrees
             }
         }
 
-        public override double Price
-        {
-            get => 4.25 + (.25 * (nuggets - 6));
-        }
-
-        public override uint Calories => 59 * nuggets;
-
         /// <summary>
         /// Creates a default Dino Nuggets entree
         /// </summary>
         public DinoNuggets()
         {
             nuggets = 6;
+            this.Price = 4.25;
+            this.Calories += 354;
         }
 
         /// <summary>
@@ -48,6 +43,8 @@ namespace DinoDiner.Menu.Entrees
         public void AddNugget()
         {
             nuggets += 1;
+            this.Price += .25;
+            this.Calories += 59;
         }
     }
 }
