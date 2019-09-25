@@ -11,7 +11,7 @@ namespace DinoDiner.Menu.Sides
     /// <summary>
     /// The MezzorellaSticks side class
     /// </summary>
-    public class MezzorellaSticks : Side
+    public class MezzorellaSticks : AbstractSide
     {
         /// <summary>
         /// The ingredients in the side
@@ -23,7 +23,7 @@ namespace DinoDiner.Menu.Sides
         /// </summary>
         public MezzorellaSticks()
         {
-            this.Size = Size.Small;
+            
         }
 
         /// <summary>

@@ -11,7 +11,7 @@ namespace DinoDiner.Menu.Sides
     /// <summary>
     /// The Triceritots side class
     /// </summary>
-    public class Triceritots : Side
+    public class Triceritots : AbstractSide
     {
         /// <summary>
         /// The ingredients in the side
@@ -23,7 +23,7 @@ namespace DinoDiner.Menu.Sides
         /// </summary>
         public Triceritots()
         {
-            this.Size = Size.Small;
+            
         }
 
         /// <summary>

@@ -1,20 +1,33 @@
-﻿using System;
+﻿/* Tyrannotea.cs
+ * Author: Nathan Faltermeier
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Text;
-using DinoDiner.Menu.Sides;
 
 namespace DinoDiner.Menu.Drinks
 {
+    /// <summary>
+    /// Tea. Comes with ice by default for whatever reason.
+    /// </summary>
     public class Tyrannotea : AbstractDrink
     {
+        // backing variable
         protected bool sweet;
 
+        /// <summary>
+        /// Creates a tea with ice, but no lemon or sweet
+        /// </summary>
         public Tyrannotea() : base(true)
         {
             Lemon = false;
             Sweet = false;
         }
 
+        /// <summary>
+        /// The drink's ingredients
+        /// </summary>
         public override List<string> Ingredients
         {
             get
@@ -27,7 +40,7 @@ namespace DinoDiner.Menu.Drinks
         }
 
         /// <summary>
-        /// Sets the side's Size. Adjusts the Price and Calories accordingly.
+        /// Sets the drink's Size. Adjusts the Price and Calories accordingly.
         /// </summary>
         public override Size Size
         {
@@ -51,6 +64,9 @@ namespace DinoDiner.Menu.Drinks
             }
         }
 
+        /// <summary>
+        /// Whether or not this is sweet tea. Sweet tea has twice as many calories.
+        /// </summary>
         public bool Sweet
         {
             get => sweet;
@@ -61,8 +77,15 @@ namespace DinoDiner.Menu.Drinks
             }
         }
 
+        /// <summary>
+        /// Whether or not this tea has a lemon
+        /// </summary>
         public bool Lemon { get; protected set; }
 
+        /// <summary>
+        /// Calculates the drink's calories based on it's size and sweet status
+        /// </summary>
+        /// <returns></returns>
         private uint CalculateCalories()
         {
             uint calories = 0;
@@ -85,6 +108,9 @@ namespace DinoDiner.Menu.Drinks
             return calories;
         }
 
+        /// <summary>
+        /// Adds a lemon to the drink. There is no going back.
+        /// </summary>
         public void AddLemon()
         {
             Lemon = true;

@@ -1,5 +1,5 @@
 ﻿using DinoDiner.Menu.Drinks;
-using DinoDiner.Menu.Sides;
+using DinoDiner.Menu;
 using Xunit;
 
 namespace MenuTest.Drinks
@@ -33,6 +33,13 @@ namespace MenuTest.Drinks
         {
             Water w = new Water();
             Assert.False(w.Lemon);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectDefaultIce()
+        {
+            Water w = new Water();
+            Assert.True(w.Ice);
         }
 
         [Fact]

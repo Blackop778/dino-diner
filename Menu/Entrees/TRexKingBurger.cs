@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DinoDiner.Menu.Entrees
 {
-    public class TRexKingBurger : AbstractMenuItem
+    public class TRexKingBurger : AbstractEntree
     {
         /// <summary>
         /// Whether or not the ingredient is included in the entree

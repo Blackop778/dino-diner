@@ -1,5 +1,5 @@
 ﻿using DinoDiner.Menu.Drinks;
-using DinoDiner.Menu.Sides;
+using DinoDiner.Menu;
 using Xunit;
 
 namespace MenuTest.Drinks
@@ -31,6 +31,13 @@ namespace MenuTest.Drinks
         }
 
         [Fact]
+        public void ShouldHaveCorrectDefaultIce()
+        {
+            Sodasaurus s = new Sodasaurus(SodasaurusFlavor.Cherry);
+            Assert.True(s.Ice);
+        }
+
+        [Fact]
         public void ShouldHaveCorrectDefaultSize()
         {
             Sodasaurus s = new Sodasaurus(SodasaurusFlavor.Cherry);
@@ -41,10 +48,10 @@ namespace MenuTest.Drinks
         public void ShouldHaveCorrectCaloriesAndPriceAfterSize()
         {
             Sodasaurus s = new Sodasaurus(SodasaurusFlavor.Cherry);
-            t.Size = Size.Medium;
-            t.Size = Size.Small;
-            Assert.Equal(.99, t.Price);
-            Assert.Equal<uint>(8, t.Calories);
+            s.Size = Size.Medium;
+            s.Size = Size.Small;
+            Assert.Equal(1.5, s.Price);
+            Assert.Equal<uint>(112, s.Calories);
 
             s.Size = Size.Medium;
             Assert.Equal(2, s.Price);

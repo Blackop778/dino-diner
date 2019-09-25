@@ -10,7 +10,7 @@ namespace DinoDiner.Menu.Entrees
     /// <summary>
     /// Brontowurst Entree
     /// </summary>
-    public class Brontowurst : AbstractMenuItem
+    public class Brontowurst : AbstractEntree
     {
         /// <summary>
         /// Whether or not the ingredient is included in the entree

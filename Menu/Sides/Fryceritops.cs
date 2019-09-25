@@ -11,7 +11,7 @@ namespace DinoDiner.Menu.Sides
     /// <summary>
     /// The Fryceritops side class
     /// </summary>
-    public class Fryceritops : Side
+    public class Fryceritops : AbstractSide
     {
         /// <summary>
         /// The ingredients in the side
@@ -23,7 +23,6 @@ namespace DinoDiner.Menu.Sides
         /// </summary>
         public Fryceritops()
         {
-            this.Size = Size.Small;
         }
 
         /// <summary>

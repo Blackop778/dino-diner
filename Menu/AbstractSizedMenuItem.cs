@@ -1,4 +1,4 @@
-﻿/* Side.cs
+﻿/* AbstractSizedMenuItem.cs
  * By: Nathan Faltermeier
  */
 
@@ -6,10 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DinoDiner.Menu.Sides
+namespace DinoDiner.Menu
 {
     /// <summary>
-    /// The sizes for side items
+    /// The sizes for the menu item
     /// </summary>
     public enum Size
     {
@@ -19,9 +19,9 @@ namespace DinoDiner.Menu.Sides
     }
 
     /// <summary>
-    /// Represents a side item. Comes in multiple sizes and defaults to small.
+    /// Represents a menu item that comes in multiple sizes. Defaults to small.
     /// </summary>
-    public abstract class Side : AbstractMenuItem
+    public abstract class AbstractSizedMenuItem : AbstractMenuItem
     {
         // Backing variable
         protected Size size;
@@ -31,7 +31,7 @@ namespace DinoDiner.Menu.Sides
         /// </summary>
         public abstract Size Size { get; set; }
 
-        public Side()
+        public AbstractSizedMenuItem()
         {
             Size = Size.Small;
         }

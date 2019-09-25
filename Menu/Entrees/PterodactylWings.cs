@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DinoDiner.Menu.Entrees
 {
-    public class PterodactylWings : AbstractMenuItem
+    public class PterodactylWings : AbstractEntree
     {
         /// <summary>
         /// The ingredients in the entree

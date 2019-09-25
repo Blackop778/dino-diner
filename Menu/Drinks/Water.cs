@@ -1,17 +1,29 @@
-﻿using System;
+﻿/* Water.cs
+ * Author: Nathan Faltermeier
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Text;
-using DinoDiner.Menu.Sides;
 
 namespace DinoDiner.Menu.Drinks
 {
+    /// <summary>
+    /// Water. Comes with Ice by default, but no lemon.
+    /// </summary>
     public class Water : AbstractDrink
     {
+        /// <summary>
+        /// Creates a default Water. Comes with Ice by default, but no lemon.
+        /// </summary>
         public Water() : base(true)
         {
             Lemon = false;
         }
 
+        /// <summary>
+        /// The drink's ingredients
+        /// </summary>
         public override List<string> Ingredients
         {
             get
@@ -23,7 +35,7 @@ namespace DinoDiner.Menu.Drinks
         }
 
         /// <summary>
-        /// Sets the side's Size. Adjusts the Price and Calories accordingly.
+        /// Sets the drink's Size. Adjusts the Price and Calories accordingly.
         /// </summary>
         public override Size Size
         {
@@ -36,8 +48,14 @@ namespace DinoDiner.Menu.Drinks
             }
         }
 
+        /// <summary>
+        /// Whether or not this drink has a lemon
+        /// </summary>
         public bool Lemon { get; protected set; }
 
+        /// <summary>
+        /// Adds a lemon to the drink.
+        /// </summary>
         public void AddLemon()
         {
             Lemon = true;

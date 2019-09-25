@@ -1,10 +1,16 @@
-﻿using System;
+﻿/* Sodasaurus.cs
+ * Author: Nathan Faltermeier
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Text;
-using DinoDiner.Menu.Sides;
 
 namespace DinoDiner.Menu.Drinks
 {
+    /// <summary>
+    /// The possible flavors for Sodasaurus
+    /// </summary>
     public enum SodasaurusFlavor
     {
         Cola,
@@ -16,17 +22,27 @@ namespace DinoDiner.Menu.Drinks
         Lime
     };
 
+    /// <summary>
+    /// A multi-flavored soda
+    /// </summary>
     public class Sodasaurus : AbstractDrink
     {
+        /// <summary>
+        /// Creates a Soda with the given flavor and ice
+        /// </summary>
+        /// <param name="flavor"></param>
         public Sodasaurus(SodasaurusFlavor flavor) : base(true)
         {
             Flavor = flavor;
         }
 
+        /// <summary>
+        /// The drink's ingredients
+        /// </summary>
         public override List<string> Ingredients => new List<string>() { "Water", "Natural Flavors", "Cane Sugar" };
 
         /// <summary>
-        /// Sets the side's Size. Adjusts the Price and Calories accordingly.
+        /// Sets the drink's Size. Adjusts the Price and Calories accordingly.
         /// </summary>
         public override Size Size
         {
@@ -52,6 +68,9 @@ namespace DinoDiner.Menu.Drinks
             }
         }
 
+        /// <summary>
+        /// The drink's flavor
+        /// </summary>
         public SodasaurusFlavor Flavor { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace DinoDiner.Menu.Sides
     /// <summary>
     /// The MeteorMacAndCheese side class
     /// </summary>
-    public class MeteorMacAndCheese : Side
+    public class MeteorMacAndCheese : AbstractSide
     {
         /// <summary>
         /// The ingredients in the side
@@ -23,7 +23,7 @@ namespace DinoDiner.Menu.Sides
         /// </summary>
         public MeteorMacAndCheese()
         {
-            this.Size = Size.Small;
+            
         }
 
         /// <summary>

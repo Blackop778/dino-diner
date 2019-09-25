@@ -1,5 +1,5 @@
 ﻿using DinoDiner.Menu.Drinks;
-using DinoDiner.Menu.Sides;
+using DinoDiner.Menu;
 using Xunit;
 
 namespace MenuTest.Drinks
@@ -27,6 +27,27 @@ namespace MenuTest.Drinks
             Assert.Contains("Water", t.Ingredients);
             Assert.Contains("Tea", t.Ingredients);
             Assert.Equal(2, t.Ingredients.Count);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectDefaultIce()
+        {
+            Tyrannotea t = new Tyrannotea();
+            Assert.True(t.Ice);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectDefaultLemon()
+        {
+            Tyrannotea t = new Tyrannotea();
+            Assert.False(t.Lemon);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectDefaultSweet()
+        {
+            Tyrannotea t = new Tyrannotea();
+            Assert.False(t.Lemon);
         }
 
         [Fact]

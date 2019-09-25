@@ -9,7 +9,7 @@ using System.Text;
 
 namespace DinoDiner.Menu.Entrees
 {
-    public class DinoNuggets : AbstractMenuItem
+    public class DinoNuggets : AbstractEntree
     {
         /// <summary>
         /// How many nuggets are in the entree
