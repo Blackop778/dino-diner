@@ -1,0 +1,77 @@
+﻿using DinoDiner.Menu.Drinks;
+using DinoDiner.Menu.Sides;
+using Xunit;
+
+namespace MenuTest.Drinks
+{
+    public class SodasaurusTest
+    {
+        [Fact]
+        public void ShouldHaveCorrectDefaultPrice()
+        {
+            Sodasaurus s = new Sodasaurus(SodasaurusFlavor.Cherry);
+            Assert.Equal(1.5, s.Price);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectDefaultCalories()
+        {
+            Sodasaurus s = new Sodasaurus(SodasaurusFlavor.Cherry);
+            Assert.Equal<uint>(112, s.Calories);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectDefaultIngredients()
+        {
+            Sodasaurus s = new Sodasaurus(SodasaurusFlavor.Cherry);
+            Assert.Contains("Water", s.Ingredients);
+            Assert.Contains("Natural Flavors", s.Ingredients);
+            Assert.Contains("Cane Sugar", s.Ingredients);
+            Assert.Equal(3, s.Ingredients.Count);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectDefaultSize()
+        {
+            Sodasaurus s = new Sodasaurus(SodasaurusFlavor.Cherry);
+            Assert.Equal(Size.Small, s.Size);
+        }
+
+        [Fact]
+        public void ShouldHaveCorrectCaloriesAndPriceAfterSize()
+        {
+            Sodasaurus s = new Sodasaurus(SodasaurusFlavor.Cherry);
+            t.Size = Size.Medium;
+            t.Size = Size.Small;
+            Assert.Equal(.99, t.Price);
+            Assert.Equal<uint>(8, t.Calories);
+
+            s.Size = Size.Medium;
+            Assert.Equal(2, s.Price);
+            Assert.Equal<uint>(156, s.Calories);
+
+            s.Size = Size.Large;
+            Assert.Equal(2.5, s.Price);
+            Assert.Equal<uint>(208, s.Calories);
+        }
+
+        [Fact]
+        public void ShouldHoldIce()
+        {
+            Sodasaurus s = new Sodasaurus(SodasaurusFlavor.Cherry);
+            s.HoldIce();
+            Assert.False(s.Ice);
+        }
+
+        [Fact]
+        public void ShouldSetFlavor()
+        {
+            Sodasaurus s = new Sodasaurus(SodasaurusFlavor.Cherry);
+            foreach (SodasaurusFlavor flavor in System.Enum.GetValues(typeof(SodasaurusFlavor)))
+            {
+                s.Flavor = flavor;
+                Assert.Equal(flavor, s.Flavor);
+            }
+        }
+    }
+}

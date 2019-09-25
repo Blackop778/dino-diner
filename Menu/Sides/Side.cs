@@ -31,5 +31,9 @@ namespace DinoDiner.Menu.Sides
         /// </summary>
         public abstract Size Size { get; set; }
 
+        public Side()
+        {
+            Size = Size.Small;
+        }
     }
 }
