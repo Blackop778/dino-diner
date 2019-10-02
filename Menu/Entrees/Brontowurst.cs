@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DinoDiner.Menu.Entrees
+namespace DinoDiner.Menu
 {
     /// <summary>
     /// Brontowurst Entree
@@ -71,6 +71,15 @@ namespace DinoDiner.Menu.Entrees
         public void HoldOnion()
         {
             this.onions = false;
+        }
+
+        /// <summary>
+        /// The item's name
+        /// </summary>
+        /// <returns>The item's name</returns>
+        public override string ToString()
+        {
+            return "Brontowurst";
         }
     }
 }

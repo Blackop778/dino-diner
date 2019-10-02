@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DinoDiner.Menu.Drinks
+namespace DinoDiner.Menu
 {
     /// <summary>
     /// The possible flavors for Sodasaurus
@@ -72,5 +72,14 @@ namespace DinoDiner.Menu.Drinks
         /// The drink's flavor
         /// </summary>
         public SodasaurusFlavor Flavor { get; set; }
+
+        /// <summary>
+        /// The item's name
+        /// </summary>
+        /// <returns>The item's name</returns>
+        public override string ToString()
+        {
+            return "Sodasaurus";
+        }
     }
 }

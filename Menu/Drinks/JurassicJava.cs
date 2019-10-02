@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DinoDiner.Menu.Drinks
+namespace DinoDiner.Menu
 {
     /// <summary>
     /// JurassicJava. Coffee. No ice or room for cream by default.
@@ -72,6 +72,15 @@ namespace DinoDiner.Menu.Drinks
         public void LeaveRoomForCream()
         {
             RoomForCream = true;
+        }
+
+        /// <summary>
+        /// The item's name
+        /// </summary>
+        /// <returns>The item's name</returns>
+        public override string ToString()
+        {
+            return "Jurassic Java";
         }
     }
 }

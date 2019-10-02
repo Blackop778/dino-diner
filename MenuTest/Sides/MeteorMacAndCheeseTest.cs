@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using DinoDiner.Menu.Sides;
+using DinoDiner.Menu;
 using DinoDiner.Menu;
 
 

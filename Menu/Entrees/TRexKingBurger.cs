@@ -6,8 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DinoDiner.Menu.Entrees
+namespace DinoDiner.Menu
 {
+    /// <summary>
+    /// The T-Rex King Burger entree
+    /// </summary>
     public class TRexKingBurger : AbstractEntree
     {
         /// <summary>
@@ -134,6 +137,15 @@ namespace DinoDiner.Menu.Entrees
         public void HoldMayo()
         {
             this.mayo = false;
+        }
+
+        /// <summary>
+        /// The item's name
+        /// </summary>
+        /// <returns>The item's name</returns>
+        public override string ToString()
+        {
+            return "TRex King Burger";
         }
     }
 }

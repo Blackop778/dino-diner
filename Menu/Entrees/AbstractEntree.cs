@@ -2,7 +2,7 @@
  * Author: Nathan Faltermeier
  */
 
-namespace DinoDiner.Menu.Entrees
+namespace DinoDiner.Menu
 {
     /// <summary>
     /// Represents an entree

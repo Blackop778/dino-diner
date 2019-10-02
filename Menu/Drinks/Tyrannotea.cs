@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DinoDiner.Menu.Drinks
+namespace DinoDiner.Menu
 {
     /// <summary>
     /// Tea. Comes with ice by default for whatever reason.
@@ -114,6 +114,15 @@ namespace DinoDiner.Menu.Drinks
         public void AddLemon()
         {
             Lemon = true;
+        }
+
+        /// <summary>
+        /// The item's name
+        /// </summary>
+        /// <returns>The item's name</returns>
+        public override string ToString()
+        {
+            return "Tyrannotea";
         }
     }
 }

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DinoDiner.Menu.Sides
+namespace DinoDiner.Menu
 {
     /// <summary>
     /// The MezzorellaSticks side class
@@ -51,6 +51,15 @@ namespace DinoDiner.Menu.Sides
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// The item's name
+        /// </summary>
+        /// <returns>The item's name</returns>
+        public override string ToString()
+        {
+            return "Mezzorella  Sticks";
         }
     }
 }

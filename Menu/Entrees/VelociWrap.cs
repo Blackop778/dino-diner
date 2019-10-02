@@ -6,8 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DinoDiner.Menu.Entrees
+namespace DinoDiner.Menu
 {
+    /// <summary>
+    /// The velociwrap entree
+    /// </summary>
     public class VelociWrap : AbstractEntree
     {
         /// <summary>
@@ -69,6 +72,15 @@ namespace DinoDiner.Menu.Entrees
         public void HoldCheese()
         {
             this.cheese = false;
+        }
+
+        /// <summary>
+        /// The item's name
+        /// </summary>
+        /// <returns>The item's name</returns>
+        public override string ToString()
+        {
+            return "VelociWrap";
         }
     }
 }

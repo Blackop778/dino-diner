@@ -7,8 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DinoDiner.Menu.Entrees
+namespace DinoDiner.Menu
 {
+    /// <summary>
+    /// The dino nuggets entree
+    /// </summary>
     public class DinoNuggets : AbstractEntree
     {
         /// <summary>
@@ -45,6 +48,15 @@ namespace DinoDiner.Menu.Entrees
             nuggets += 1;
             this.Price += .25;
             this.Calories += 59;
+        }
+
+        /// <summary>
+        /// The item's name
+        /// </summary>
+        /// <returns>The item's name</returns>
+        public override string ToString()
+        {
+            return "Dino Nuggets";
         }
     }
 }

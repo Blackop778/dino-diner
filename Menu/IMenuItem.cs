@@ -1,4 +1,4 @@
-﻿/* AbstractMenuItem.cs
+﻿/* IMenuItem.cs
  * Author: Nathan Faltermeier
  */
 
@@ -9,22 +9,22 @@ using System.Text;
 namespace DinoDiner.Menu
 {
     /// <summary>
-    /// Abstract menu item
+    /// menu item interface
     /// </summary>
-    public abstract class AbstractMenuItem : IMenuItem
+    public interface IMenuItem
     {
         /// <summary>
         /// Gets the item's price
         /// </summary>
-        public virtual double Price { get; set; }
+        double Price { get; set; }
         /// <summary>
         /// Gets the item's calories
         /// </summary>
-        public virtual uint Calories { get; set; }
+        uint Calories { get; set; }
 
         /// <summary>
         ///  Gets the item's ingredient list
         /// </summary>
-        public abstract List<string> Ingredients { get; }
+        List<string> Ingredients { get; }
     }
 }
