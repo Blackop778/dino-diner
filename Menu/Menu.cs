@@ -1,4 +1,8 @@
-﻿using System;
+﻿/* Menu.cs
+ * Author: Nathan Faltermeier
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 

@@ -1,6 +1,5 @@
 ﻿using Xunit;
 using DinoDiner.Menu;
-using DinoDiner.Menu;
 
 
 namespace MenuTest.Sides
