@@ -122,7 +122,7 @@ namespace DinoDiner.Menu
         /// <returns>The item's name</returns>
         public override string ToString()
         {
-            return "Tyrannotea";
+            return $"{base.ToString()} {(Sweet ? "Sweet " : "")}Tyrannotea";
         }
     }
 }

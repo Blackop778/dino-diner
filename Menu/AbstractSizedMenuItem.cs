@@ -31,9 +31,21 @@ namespace DinoDiner.Menu
         /// </summary>
         public abstract Size Size { get; set; }
 
+        /// <summary>
+        /// Creates a small menu item
+        /// </summary>
         public AbstractSizedMenuItem()
         {
             Size = Size.Small;
+        }
+
+        /// <summary>
+        /// Returns the item's size
+        /// </summary>
+        /// <returns>The menu item's size</returns>
+        public override string ToString()
+        {
+            return Size.ToString();
         }
     }
 }

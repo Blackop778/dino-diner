@@ -20,11 +20,11 @@ namespace DinoDiner.Menu
         /// <summary>
         /// The combo's side item
         /// </summary>
-        public Side Side { get; set; }
+        public Side Side { get; set; } = new MeteorMacAndCheese();
         /// <summary>
         /// The combo's drink
         /// </summary>
-        public Drink Drink { get; set; }
+        public Drink Drink { get; set; } = new Sodasaurus();
         /// <summary>
         /// The combo's toy
         /// </summary>
@@ -73,9 +73,13 @@ namespace DinoDiner.Menu
         /// <returns>The item's name</returns>
         public override string ToString()
         {
-            return "CretaciousCombo";
+            return $"{Entree} Combo";
         }
 
+        /// <summary>
+        /// Creates a combo with the given entree
+        /// </summary>
+        /// <param name="entree">The combo's entree</param>
         public CretaceousCombo(Entree entree)
         {
             Entree = entree;
