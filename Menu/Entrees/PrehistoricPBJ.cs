@@ -10,7 +10,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// The prehistoric pbj entree
     /// </summary>
-    public class PrehistoricPBJ : AbstractEntree
+    public class PrehistoricPBJ : Entree
     {
         /// <summary>
         /// Whether or not the ingredient is included in the entree

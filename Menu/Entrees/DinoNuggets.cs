@@ -12,7 +12,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// The dino nuggets entree
     /// </summary>
-    public class DinoNuggets : AbstractEntree
+    public class DinoNuggets : Entree
     {
         /// <summary>
         /// How many nuggets are in the entree

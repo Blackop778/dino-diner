@@ -25,15 +25,15 @@ namespace DinoDiner.Menu
     /// <summary>
     /// A multi-flavored soda
     /// </summary>
-    public class Sodasaurus : AbstractDrink
+    public class Sodasaurus : Drink
     {
         /// <summary>
         /// Creates a Soda with the given flavor and ice
         /// </summary>
         /// <param name="flavor"></param>
-        public Sodasaurus(SodasaurusFlavor flavor) : base(true)
+        public Sodasaurus() : base(true)
         {
-            Flavor = flavor;
+            Flavor = SodasaurusFlavor.Cherry;
         }
 
         /// <summary>

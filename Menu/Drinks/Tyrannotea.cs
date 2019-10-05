@@ -11,7 +11,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// Tea. Comes with ice by default for whatever reason.
     /// </summary>
-    public class Tyrannotea : AbstractDrink
+    public class Tyrannotea : Drink
     {
         // backing variable
         protected bool sweet;

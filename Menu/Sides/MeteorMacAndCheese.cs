@@ -11,7 +11,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// The MeteorMacAndCheese side class
     /// </summary>
-    public class MeteorMacAndCheese : AbstractSide
+    public class MeteorMacAndCheese : Side
     {
         /// <summary>
         /// The ingredients in the side
@@ -59,7 +59,7 @@ namespace DinoDiner.Menu
         /// <returns>The item's name</returns>
         public override string ToString()
         {
-            return "Meteor Mac and Cheese";
+            return Size + " Meteor Mac and Cheese";
         }
     }
 }

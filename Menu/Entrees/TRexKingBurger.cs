@@ -11,7 +11,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// The T-Rex King Burger entree
     /// </summary>
-    public class TRexKingBurger : AbstractEntree
+    public class TRexKingBurger : Entree
     {
         /// <summary>
         /// Whether or not the ingredient is included in the entree

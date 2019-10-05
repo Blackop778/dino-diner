@@ -1,4 +1,4 @@
-﻿/* AbstractDrink.cs
+﻿/* Drink.cs
  * Author: Nathan Faltermeier
  */
 
@@ -11,7 +11,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// Represents a drink. Can be in multiple sizes and by default comes with ice.
     /// </summary>
-    public abstract class AbstractDrink : AbstractSizedMenuItem
+    public abstract class Drink : AbstractSizedMenuItem
     {
         /// <summary>
         /// Whether or not the drink comes with ice
@@ -22,7 +22,7 @@ namespace DinoDiner.Menu
         /// Creates a drink with the specified ice status
         /// </summary>
         /// <param name="ice"></param>
-        public AbstractDrink(bool ice)
+        public Drink(bool ice)
         {
             Ice = ice;
         }

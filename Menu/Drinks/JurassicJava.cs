@@ -11,7 +11,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// JurassicJava. Coffee. No ice or room for cream by default.
     /// </summary>
-    public class JurassicJava : AbstractDrink
+    public class JurassicJava : Drink
     {
         /// <summary>
         /// The drink's ingredients
@@ -45,6 +45,8 @@ namespace DinoDiner.Menu
             }
         }
 
+        public bool Decaf { get; set; }
+
         /// <summary>
         /// Whether or not the drink has room for cream
         /// </summary>
@@ -56,6 +58,7 @@ namespace DinoDiner.Menu
         public JurassicJava() : base(false)
         {
             RoomForCream = false;
+            Decaf = false;
         }
 
         /// <summary>

@@ -11,7 +11,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// The pterodactyl wings entree
     /// </summary>
-    public class PterodactylWings : AbstractEntree
+    public class PterodactylWings : Entree
     {
         /// <summary>
         /// The ingredients in the entree

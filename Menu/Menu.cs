@@ -19,10 +19,10 @@ namespace DinoDiner.Menu
         public Menu()
         {
             AvalibleMenuItems = new List<IMenuItem>();
-            AvalibleEntrees = new List<AbstractEntree>();
-            AvailableSides = new List<AbstractSide>();
-            AvailableDrinks = new List<AbstractDrink>();
-            AvailableCombos = new List<CretaciousCombo>();
+            AvalibleEntrees = new List<Entree>();
+            AvailableSides = new List<Side>();
+            AvailableDrinks = new List<Drink>();
+            AvailableCombos = new List<CretaceousCombo>();
 
             AddItem(new Brontowurst());
             AddItem(new DinoNuggets());
@@ -38,7 +38,7 @@ namespace DinoDiner.Menu
             AddItem(new Triceritots());
 
             AddItem(new JurassicJava());
-            AddItem(new Sodasaurus(SodasaurusFlavor.Cherry));
+            AddItem(new Sodasaurus());
             AddItem(new Tyrannotea());
             AddItem(new Water());
         }
@@ -51,22 +51,22 @@ namespace DinoDiner.Menu
         /// <summary>
         /// All available entrees
         /// </summary>
-        public List<AbstractEntree> AvalibleEntrees { get; protected set; }
+        public List<Entree> AvalibleEntrees { get; protected set; }
 
         /// <summary>
         /// All available sides
         /// </summary>
-        public List<AbstractSide> AvailableSides { get; protected set; }
+        public List<Side> AvailableSides { get; protected set; }
 
         /// <summary>
         /// All available drinks
         /// </summary>
-        public List<AbstractDrink> AvailableDrinks { get; protected set; }
+        public List<Drink> AvailableDrinks { get; protected set; }
 
         /// <summary>
         /// All available combos
         /// </summary>
-        public List<CretaciousCombo> AvailableCombos { get; protected set; }
+        public List<CretaceousCombo> AvailableCombos { get; protected set; }
 
         /// <summary>
         /// Adds a menu item to the appropriate lists
@@ -76,13 +76,13 @@ namespace DinoDiner.Menu
         {
             AvalibleMenuItems.Add(item);
 
-            if (item is AbstractEntree e)
+            if (item is Entree e)
                 AvalibleEntrees.Add(e);
-            else if (item is AbstractSide s)
+            else if (item is Side s)
                 AvailableSides.Add(s);
-            else if (item is AbstractDrink d)
+            else if (item is Drink d)
                 AvailableDrinks.Add(d);
-            else if (item is CretaciousCombo c)
+            else if (item is CretaceousCombo c)
                 AvailableCombos.Add(c);
         }
 
@@ -94,13 +94,13 @@ namespace DinoDiner.Menu
         {
             AvalibleMenuItems.Remove(item);
 
-            if (item is AbstractEntree e)
+            if (item is Entree e)
                 AvalibleEntrees.Remove(e);
-            else if (item is AbstractSide s)
+            else if (item is Side s)
                 AvailableSides.Remove(s);
-            else if (item is AbstractDrink d)
+            else if (item is Drink d)
                 AvailableDrinks.Remove(d);
-            else if (item is CretaciousCombo c)
+            else if (item is CretaceousCombo c)
                 AvailableCombos.Remove(c);
         }
 

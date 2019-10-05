@@ -11,20 +11,20 @@ namespace DinoDiner.Menu
     /// <summary>
     /// Comes with an entree, side, and a drink. Combined price is discounted $0.25.
     /// </summary>
-    public class CretaciousCombo : AbstractSizedMenuItem
+    public class CretaceousCombo : AbstractSizedMenuItem
     {
         /// <summary>
         /// The combo's entree item
         /// </summary>
-        public AbstractEntree Entree { get; set; }
+        public Entree Entree { get; set; }
         /// <summary>
         /// The combo's side item
         /// </summary>
-        public AbstractSide Side { get; set; }
+        public Side Side { get; set; }
         /// <summary>
         /// The combo's drink
         /// </summary>
-        public AbstractDrink Drink { get; set; }
+        public Drink Drink { get; set; }
         /// <summary>
         /// The combo's toy
         /// </summary>
@@ -74,6 +74,11 @@ namespace DinoDiner.Menu
         public override string ToString()
         {
             return "CretaciousCombo";
+        }
+
+        public CretaceousCombo(Entree entree)
+        {
+            Entree = entree;
         }
     }
 }

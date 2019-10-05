@@ -11,7 +11,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// Water. Comes with Ice by default, but no lemon.
     /// </summary>
-    public class Water : AbstractDrink
+    public class Water : Drink
     {
         /// <summary>
         /// Creates a default Water. Comes with Ice by default, but no lemon.

@@ -11,7 +11,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// Steakosaurus Burger Entree
     /// </summary>
-    public class SteakosaurusBurger : AbstractEntree
+    public class SteakosaurusBurger : Entree
     {
         /// <summary>
         /// Whether or not the ingredient is included in the entree

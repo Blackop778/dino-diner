@@ -11,7 +11,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// The MezzorellaSticks side class
     /// </summary>
-    public class MezzorellaSticks : AbstractSide
+    public class MezzorellaSticks : Side
     {
         /// <summary>
         /// The ingredients in the side
@@ -59,7 +59,7 @@ namespace DinoDiner.Menu
         /// <returns>The item's name</returns>
         public override string ToString()
         {
-            return "Mezzorella  Sticks";
+            return Size + " Mezzorella  Sticks";
         }
     }
 }

@@ -11,7 +11,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// The velociwrap entree
     /// </summary>
-    public class VelociWrap : AbstractEntree
+    public class VelociWrap : Entree
     {
         /// <summary>
         /// Whether or not the ingredient is included in the entree

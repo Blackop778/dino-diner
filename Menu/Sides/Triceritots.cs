@@ -11,7 +11,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// The Triceritots side class
     /// </summary>
-    public class Triceritots : AbstractSide
+    public class Triceritots : Side
     {
         /// <summary>
         /// The ingredients in the side
@@ -59,7 +59,7 @@ namespace DinoDiner.Menu
         /// <returns>The item's name</returns>
         public override string ToString()
         {
-            return "Triceritots";
+            return Size + " Triceritots";
         }
     }
 }

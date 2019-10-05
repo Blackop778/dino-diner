@@ -11,7 +11,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// The Fryceritops side class
     /// </summary>
-    public class Fryceritops : AbstractSide
+    public class Fryceritops : Side
     {
         /// <summary>
         /// The ingredients in the side
@@ -56,7 +56,7 @@ namespace DinoDiner.Menu
         /// <returns>The item's name</returns>
         public override string ToString()
         {
-            return "Fryceritops";
+            return Size + " Friceritops";
         }
     }
 }
