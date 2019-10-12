@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace DinoDiner.Menu
@@ -11,12 +12,25 @@ namespace DinoDiner.Menu
     /// <summary>
     /// Abstract menu item
     /// </summary>
-    public abstract class AbstractMenuItem : IMenuItem
+    public abstract class AbstractMenuItem : IMenuItem, INotifyPropertyChanged
     {
+        // Declare event handler
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Notifies listeners that a property was changed
+        /// </summary>
+        /// <param name="name">Name of the changed property</param>
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         /// <summary>
         /// Gets the item's price
         /// </summary>
         public virtual double Price { get; set; }
+
         /// <summary>
         /// Gets the item's calories
         /// </summary>

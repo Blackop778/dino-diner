@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,17 +17,21 @@ using DinoDiner.Menu;
 namespace PointOfSale
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ComboSelection.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ComboSelection : Page
     {
-        public static DinoDiner.Menu.Menu menu = new DinoDiner.Menu.Menu();
-        public static BindingList<IMenuItem> order = new BindingList<IMenuItem>();
-
-        public MainWindow()
+        public ComboSelection()
         {
             InitializeComponent();
-            list.ItemsSource = order;
+            foreach (CretaceousCombo c in MainWindow.menu.AvailableCombos)
+            {
+                Button b = new Button
+                {
+                    Content = c.ToString()
+                };
+                wrapPanel.Children.Add(b);
+            }
         }
     }
 }

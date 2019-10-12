@@ -41,6 +41,14 @@ namespace DinoDiner.Menu
             AddItem(new Sodasaurus());
             AddItem(new Tyrannotea());
             AddItem(new Water());
+
+            AddItem(new CretaceousCombo(new Brontowurst()));
+            AddItem(new CretaceousCombo(new DinoNuggets()));
+            AddItem(new CretaceousCombo(new PrehistoricPBJ()));
+            AddItem(new CretaceousCombo(new PterodactylWings()));
+            AddItem(new CretaceousCombo(new SteakosaurusBurger()));
+            AddItem(new CretaceousCombo(new TRexKingBurger()));
+            AddItem(new CretaceousCombo(new VelociWrap()));
         }
 
         /// <summary>

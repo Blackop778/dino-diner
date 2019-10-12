@@ -13,18 +13,35 @@ namespace DinoDiner.Menu
     /// </summary>
     public class CretaceousCombo : AbstractSizedMenuItem
     {
+        //backing variables
+        private Entree entree;
+        private Side side = new MeteorMacAndCheese();
+        private Drink drink = new Sodasaurus();
+
         /// <summary>
         /// The combo's entree item
         /// </summary>
-        public Entree Entree { get; set; }
+        public Entree Entree
+        {
+            get => entree;
+            set { entree = value; OnPropertyChanged("Entree"); }
+        }
         /// <summary>
         /// The combo's side item
         /// </summary>
-        public Side Side { get; set; } = new MeteorMacAndCheese();
+        public Side Side
+        {
+            get => side;
+            set { side = value; OnPropertyChanged("Side"); }
+        }
         /// <summary>
         /// The combo's drink
         /// </summary>
-        public Drink Drink { get; set; } = new Sodasaurus();
+        public Drink Drink
+        {
+            get => drink;
+            set { drink = value; OnPropertyChanged("Drink"); }
+        }
         /// <summary>
         /// The combo's toy
         /// </summary>

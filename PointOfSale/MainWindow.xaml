@@ -7,7 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
-        <TextBlock DockPanel.Dock="Right" Width="200" TextAlignment="Center" Background="LightSteelBlue">// TODO: Order</TextBlock>
+        <ListBox DockPanel.Dock="Right" Width="200" Background="LightSteelBlue" Name="list">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <local:OrderItem Item="{Binding}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Frame Source="MenuCategorySelection.xaml"></Frame>
     </DockPanel>
 </Window>

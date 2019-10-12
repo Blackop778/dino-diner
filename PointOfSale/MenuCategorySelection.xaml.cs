@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,22 +12,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DinoDiner.Menu;
 
 namespace PointOfSale
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MenuCategorySelection.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MenuCategorySelection : Page
     {
-        public static DinoDiner.Menu.Menu menu = new DinoDiner.Menu.Menu();
-        public static BindingList<IMenuItem> order = new BindingList<IMenuItem>();
-
-        public MainWindow()
+        public MenuCategorySelection()
         {
             InitializeComponent();
-            list.ItemsSource = order;
+        }
+
+        public void SelectCombo(object sender, RoutedEventArgs args)
+        {
+            NavigationService.Navigate(new ComboSelection());
+        }
+
+        public void SelectEntree(object sender, RoutedEventArgs args)
+        {
+            NavigationService.Navigate(new EntreeSelection());
         }
     }
 }
