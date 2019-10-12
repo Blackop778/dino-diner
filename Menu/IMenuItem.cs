@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace DinoDiner.Menu
@@ -11,7 +12,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// menu item interface
     /// </summary>
-    public interface IMenuItem
+    public interface IMenuItem : INotifyPropertyChanged, ICloneable
     {
         /// <summary>
         /// Gets the item's price

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,13 @@ namespace PointOfSale
         {
             InitializeComponent();
             list.ItemsSource = order;
+            order.ListChanged += ListBox_ListChanged;
+        }
+
+        public void ListBox_ListChanged(object sender, ListChangedEventArgs args)
+        {
+            // Redraw the list items when, say, a coffee becomes decaf
+            list.Items.Refresh();
         }
     }
 }

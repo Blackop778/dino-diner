@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DinoDiner.Menu;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,21 @@ namespace PointOfSale
         public void SelectEntree(object sender, RoutedEventArgs args)
         {
             NavigationService.Navigate(new EntreeSelection());
+        }
+
+        public void SelectDrink(object sender, RoutedEventArgs args)
+        {
+            NavigationService.Navigate(new DrinkSelection(AddItemToOrder));
+        }
+
+        public void SelectSide(object sender, RoutedEventArgs args)
+        {
+            NavigationService.Navigate(new DrinkSelection(AddItemToOrder));
+        }
+
+        public void AddItemToOrder(IMenuItem item)
+        {
+            MainWindow.order.Add(item);
         }
     }
 }

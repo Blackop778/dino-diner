@@ -27,11 +27,13 @@ namespace DinoDiner.Menu
     /// </summary>
     public class Sodasaurus : Drink
     {
+        // Backing variable
+        private SodasaurusFlavor flavor;
         /// <summary>
         /// Creates a Soda with the given flavor and ice
         /// </summary>
         /// <param name="flavor"></param>
-        public Sodasaurus() : base(true)
+        public Sodasaurus()
         {
             Flavor = SodasaurusFlavor.Cherry;
         }
@@ -65,13 +67,26 @@ namespace DinoDiner.Menu
                         Calories = 208;
                         break;
                 }
+                OnPropertyChanged("Size");
             }
         }
 
         /// <summary>
         /// The drink's flavor
         /// </summary>
-        public SodasaurusFlavor Flavor { get; set; }
+        public SodasaurusFlavor Flavor {
+            get => flavor;
+            set { flavor = value; OnPropertyChanged("Flavor"); }
+        }
+
+        /// <summary>
+        /// The drink's basename with no additional words
+        /// </summary>
+        /// <returns>The drink's basename with no additional words</returns>
+        public override string BaseName()
+        {
+            return "Sodasaurus";
+        }
 
         /// <summary>
         /// The item's name
@@ -79,7 +94,7 @@ namespace DinoDiner.Menu
         /// <returns>The item's name</returns>
         public override string ToString()
         {
-            return $"{base.ToString()} {Flavor} Sodasaurus";
+            return $"{Size} {Flavor} {BaseName()}";
         }
     }
 }

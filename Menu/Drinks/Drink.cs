@@ -12,10 +12,8 @@ namespace DinoDiner.Menu
     /// <summary>
     /// Represents a drink. Can be in multiple sizes and by default comes with ice.
     /// </summary>
-    public abstract class Drink : AbstractSizedMenuItem, INotifyPropertyChanged
+    public abstract class Drink : AbstractSizedMenuItem
     {
-        // Declare event handler
-        public event PropertyChangedEventHandler PropertyChanged;
         //backing variable
         private bool ice;
 
@@ -28,12 +26,16 @@ namespace DinoDiner.Menu
         }
 
         /// <summary>
-        /// Creates a drink with the specified ice status
+        /// Whether or not a drink comes with Ice by default
         /// </summary>
-        /// <param name="ice"></param>
-        public Drink(bool ice)
+        public virtual bool IceByDefault => true;
+
+        /// <summary>
+        /// Creates a drink with it's default ice status
+        /// </summary>
+        public Drink()
         {
-            Ice = ice;
+            Ice = IceByDefault;
         }
 
         /// <summary>
@@ -44,9 +46,19 @@ namespace DinoDiner.Menu
             Ice = false;
         }
 
-        protected void OnPropertyChanged(string name)
+        /// <summary>
+        /// The drink's basename with no additional words
+        /// </summary>
+        /// <returns>The drink's basename with no additional words</returns>
+        public abstract string BaseName();
+
+        /// <summary>
+        /// Returns the drink's size followed by it's basename
+        /// </summary>
+        /// <returns>the drink's size followed by it's basename</returns>
+        public override string ToString()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            return $"{Size} {BaseName()}";
         }
     }
 }

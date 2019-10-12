@@ -13,10 +13,13 @@ namespace DinoDiner.Menu
     /// </summary>
     public class Water : Drink
     {
+        // Backing variable
+        private bool lemon;
+
         /// <summary>
         /// Creates a default Water. Comes with Ice by default, but no lemon.
         /// </summary>
-        public Water() : base(true)
+        public Water()
         {
             Lemon = false;
         }
@@ -45,13 +48,17 @@ namespace DinoDiner.Menu
                 size = value;
                 Price = .10;
                 Calories = 0;
+                OnPropertyChanged("Size");
             }
         }
 
         /// <summary>
         /// Whether or not this drink has a lemon
         /// </summary>
-        public bool Lemon { get; protected set; }
+        public bool Lemon {
+            get => lemon;
+            set { lemon = value; OnPropertyChanged("Lemon"); }
+        }
 
         /// <summary>
         /// Adds a lemon to the drink.
@@ -62,12 +69,12 @@ namespace DinoDiner.Menu
         }
 
         /// <summary>
-        /// The item's name
+        /// The drink's basename with no additional words
         /// </summary>
-        /// <returns>The item's name</returns>
-        public override string ToString()
+        /// <returns>The drink's basename with no additional words</returns>
+        public override string BaseName()
         {
-            return base.ToString() + " Water";
+            return "Water";
         }
     }
 }

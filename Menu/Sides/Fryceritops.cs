@@ -47,16 +47,17 @@ namespace DinoDiner.Menu
                         Calories = 480;
                         break;
                 }
+                OnPropertyChanged("Size");
             }
         }
 
         /// <summary>
-        /// The item's name
+        /// The side's basename with no additional words
         /// </summary>
-        /// <returns>The item's name</returns>
-        public override string ToString()
+        /// <returns>The side's basename with no additional words</returns>
+        public override string BaseName()
         {
-            return Size + " Fryceritops";
+            return "Fryceritops";
         }
     }
 }

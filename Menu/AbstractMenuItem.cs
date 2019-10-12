@@ -12,7 +12,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// Abstract menu item
     /// </summary>
-    public abstract class AbstractMenuItem : IMenuItem, INotifyPropertyChanged
+    public abstract class AbstractMenuItem : IMenuItem
     {
         // Declare event handler
         public event PropertyChangedEventHandler PropertyChanged;
@@ -40,5 +40,14 @@ namespace DinoDiner.Menu
         ///  Gets the item's ingredient list
         /// </summary>
         public abstract List<string> Ingredients { get; }
+
+        /// <summary>
+        /// Returns a shallow copy of this object
+        /// </summary>
+        /// <returns></returns>
+        public virtual object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }

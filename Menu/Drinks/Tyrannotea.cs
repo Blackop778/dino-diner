@@ -14,12 +14,13 @@ namespace DinoDiner.Menu
     public class Tyrannotea : Drink
     {
         // backing variable
-        protected bool sweet;
+        private bool sweet;
+        private bool lemon;
 
         /// <summary>
         /// Creates a tea with ice, but no lemon or sweet
         /// </summary>
-        public Tyrannotea() : base(true)
+        public Tyrannotea()
         {
             Lemon = false;
             Sweet = false;
@@ -61,6 +62,7 @@ namespace DinoDiner.Menu
                         break;
                 }
                 Calories = CalculateCalories();
+                OnPropertyChanged("Size");
             }
         }
 
@@ -74,13 +76,17 @@ namespace DinoDiner.Menu
             {
                 sweet = value;
                 Calories = CalculateCalories();
+                OnPropertyChanged("Sweet");
             }
         }
 
         /// <summary>
         /// Whether or not this tea has a lemon
         /// </summary>
-        public bool Lemon { get; protected set; }
+        public bool Lemon {
+            get => lemon;
+            set { lemon = value; OnPropertyChanged("Lemon"); }
+        }
 
         /// <summary>
         /// Calculates the drink's calories based on it's size and sweet status
@@ -117,12 +123,21 @@ namespace DinoDiner.Menu
         }
 
         /// <summary>
+        /// The drink's basename with no additional words
+        /// </summary>
+        /// <returns>The drink's basename with no additional words</returns>
+        public override string BaseName()
+        {
+            return "Tyrannotea";
+        }
+
+        /// <summary>
         /// The item's name
         /// </summary>
         /// <returns>The item's name</returns>
         public override string ToString()
         {
-            return $"{base.ToString()} {(Sweet ? "Sweet " : "")}Tyrannotea";
+            return $"{Size} {(Sweet ? "Sweet " : "")}{BaseName()}";
         }
     }
 }

@@ -29,31 +29,34 @@ namespace PointOfSale
         {
             Combo = combo;
             InitializeComponent();
+            smallButton.Tag = DinoDiner.Menu.Size.Small;
+            mediumButton.Tag = DinoDiner.Menu.Size.Medium;
+            largeButton.Tag = DinoDiner.Menu.Size.Large;
         }
 
-        public void SideSelectionCallback(Side drink)
+        public void SideSelectionCallback(Side side)
         {
-
+            Combo.Side = side;
         }
 
         public void DrinkSelectionCallback(Drink drink)
         {
-
+            Combo.Drink = drink;
         }
 
-        public void SideCallback(object sender, RoutedEventArgs args)
+        public void SideClicked(object sender, RoutedEventArgs args)
         {
-
+            NavigationService.Navigate(new ComboSelection());
         }
 
-        public void DrinkCallback(object sender, RoutedEventArgs args)
+        public void DrinkClicked(object sender, RoutedEventArgs args)
         {
-
+            NavigationService.Navigate(new ComboSelection());
         }
 
-        public void SizeCallback(object sender, RoutedEventArgs args)
+        public void SizeClicked(object sender, RoutedEventArgs args)
         {
-
+            Combo.Size = (DinoDiner.Menu.Size) (sender as Button).Tag;
         }
     }
 }

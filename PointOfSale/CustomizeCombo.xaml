@@ -9,10 +9,10 @@
       Title="CustomizeCombo">
 
     <Grid>
-        <Button Content="Side" HorizontalAlignment="Left" Margin="125,91,0,0" VerticalAlignment="Top" Name="sideButton" Width="157" Height="95"/>
-        <Button Content="Drink" HorizontalAlignment="Left" Margin="488,91,0,0" VerticalAlignment="Top" Name="drinkButton" Width="157" Height="95"/>
-        <Button Content="Small" HorizontalAlignment="Left" Margin="125,327,0,0" VerticalAlignment="Top" Name="smallButton" Width="157" Height="95"/>
-        <Button Content="Medium" Margin="0,327,331,0" Name="mediumButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="157" Height="95"/>
-        <Button Content="Large" Margin="0,327,155,0" VerticalAlignment="Top" Name="largeButton" HorizontalAlignment="Right" Width="157" Height="95"/>
+        <Button Content="Side" HorizontalAlignment="Left" Margin="125,91,0,0" VerticalAlignment="Top" Name="sideButton" Width="157" Height="95" Click="SideClicked"/>
+        <Button Content="Drink" HorizontalAlignment="Left" Margin="488,91,0,0" VerticalAlignment="Top" Name="drinkButton" Width="157" Height="95" Click="DrinkClicked"/>
+        <Button Content="Small" HorizontalAlignment="Left" Margin="125,327,0,0" VerticalAlignment="Top" Name="smallButton" Width="157" Height="95" Click="SizeClicked"/>
+        <Button Content="Medium" Margin="0,327,331,0" Name="mediumButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="157" Height="95" Click="SizeClicked"/>
+        <Button Content="Large" Margin="0,327,155,0" VerticalAlignment="Top" Name="largeButton" HorizontalAlignment="Right" Width="157" Height="95" Click="SizeClicked"/>
     </Grid>
 </Page>

@@ -17,28 +17,33 @@ using DinoDiner.Menu;
 namespace PointOfSale
 {
     /// <summary>
-    /// Interaction logic for EntreeSelection.xaml
+    /// Interaction logic for FlavorSelection.xaml
     /// </summary>
-    public partial class EntreeSelection : Page
+    public partial class FlavorSelection : Page
     {
-        public EntreeSelection()
+        public Action<SodasaurusFlavor> Callback { get; set; }
+
+        public FlavorSelection() : this(null) { }
+
+        public FlavorSelection(Action<SodasaurusFlavor> callback)
         {
+            Callback = callback;
             InitializeComponent();
-            foreach (Entree e in MainWindow.menu.AvalibleEntrees)
+            foreach (SodasaurusFlavor f in Enum.GetValues(typeof(SodasaurusFlavor)))
             {
                 Button b = new Button
                 {
-                    Content = e.ToString(),
-                    Tag = e,
+                    Content = f.ToString(),
+                    Tag = f,
                 };
                 b.Click += OnButtonClicked;
-                wrapPanel.Children.Add(b);
+                flavorPanel.Children.Add(b);
             }
         }
 
         public void OnButtonClicked(object sender, RoutedEventArgs args)
         {
-            MainWindow.order.Add(((sender as Button).Tag as IMenuItem).Clone() as IMenuItem);
+            Callback((SodasaurusFlavor) (sender as Button).Tag );
         }
     }
 }

@@ -13,6 +13,10 @@ namespace DinoDiner.Menu
     /// </summary>
     public class JurassicJava : Drink
     {
+        // backing variables
+        private bool decaf;
+        private bool roomForCream;
+
         /// <summary>
         /// The drink's ingredients
         /// </summary>
@@ -42,20 +46,35 @@ namespace DinoDiner.Menu
                         Calories = 8;
                         break;
                 }
+                OnPropertyChanged("Size");
             }
         }
 
-        public bool Decaf { get; set; }
+        /// <summary>
+        /// Whether or not the coffee is decaf
+        /// </summary>
+        public bool Decaf {
+            get => decaf;
+            set { decaf = value; OnPropertyChanged("Decaf"); }
+        }
 
         /// <summary>
         /// Whether or not the drink has room for cream
         /// </summary>
-        public bool RoomForCream { get; protected set; }
+        public bool RoomForCream {
+            get => roomForCream;
+            set { roomForCream = value; OnPropertyChanged("RoomForCream"); }
+        }
+
+        /// <summary>
+        /// Coffee does not come with ice by default
+        /// </summary>
+        public override bool IceByDefault => false;
 
         /// <summary>
         /// Creates a JurassicJava with no ice or room for cream
         /// </summary>
-        public JurassicJava() : base(false)
+        public JurassicJava()
         {
             RoomForCream = false;
             Decaf = false;
@@ -78,12 +97,21 @@ namespace DinoDiner.Menu
         }
 
         /// <summary>
+        /// The drink's basename with no additional words
+        /// </summary>
+        /// <returns>The drink's basename with no additional words</returns>
+        public override string BaseName()
+        {
+            return "Jurassic Java";
+        }
+
+        /// <summary>
         /// The item's name
         /// </summary>
         /// <returns>The item's name</returns>
         public override string ToString()
         {
-            return $"{base.ToString()} {(Decaf ? "Decaf " : "")}Jurassic Java";
+            return $"{Size} {(Decaf ? "Decaf " : "")}{BaseName()}";
         }
     }
 }
