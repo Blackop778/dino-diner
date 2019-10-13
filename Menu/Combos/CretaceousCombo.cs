@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace DinoDiner.Menu
@@ -24,7 +25,12 @@ namespace DinoDiner.Menu
         public Entree Entree
         {
             get => entree;
-            set { entree = value; OnPropertyChanged("Entree"); }
+            set {
+                if (entree != null) entree.PropertyChanged -= OnItemPropertyChanged;
+                entree = value;
+                if (entree != null) entree.PropertyChanged += OnItemPropertyChanged;
+                OnPropertyChanged("Entree");
+            }
         }
         /// <summary>
         /// The combo's side item
@@ -32,7 +38,13 @@ namespace DinoDiner.Menu
         public Side Side
         {
             get => side;
-            set { side = value; OnPropertyChanged("Side"); }
+            set
+            {
+                if (side != null) side.PropertyChanged -= OnItemPropertyChanged;
+                side = value;
+                if (side != null) side.PropertyChanged += OnItemPropertyChanged;
+                OnPropertyChanged("Side");
+            }
         }
         /// <summary>
         /// The combo's drink
@@ -40,7 +52,13 @@ namespace DinoDiner.Menu
         public Drink Drink
         {
             get => drink;
-            set { drink = value; OnPropertyChanged("Drink"); }
+            set
+            {
+                if (drink != null) drink.PropertyChanged -= OnItemPropertyChanged;
+                drink = value;
+                if (drink != null) drink.PropertyChanged += OnItemPropertyChanged;
+                OnPropertyChanged("Drink");
+            }
         }
         /// <summary>
         /// The combo's toy
@@ -100,6 +118,16 @@ namespace DinoDiner.Menu
         public CretaceousCombo(Entree entree)
         {
             Entree = entree;
+        }
+
+        /// <summary>
+        /// Rebroadcast an Entree, Side, or Drink's property changed event for the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void OnItemPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            OnPropertyChanged(args.PropertyName);
         }
     }
 }

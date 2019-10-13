@@ -1,4 +1,7 @@
-﻿using System;
+﻿/* MainWindow.xaml.cs
+ * Author: Nathan Faltermeier
+ */
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -24,7 +27,13 @@ namespace PointOfSale
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The available items in the menu
+        /// </summary>
         public static DinoDiner.Menu.Menu menu = new DinoDiner.Menu.Menu();
+        /// <summary>
+        /// The current order
+        /// </summary>
         public static BindingList<IMenuItem> order = new BindingList<IMenuItem>();
 
         public MainWindow()
@@ -34,6 +43,9 @@ namespace PointOfSale
             order.ListChanged += ListBox_ListChanged;
         }
 
+        /// <summary>
+        /// Redraw order list in UI
+        /// </summary>
         public void ListBox_ListChanged(object sender, ListChangedEventArgs args)
         {
             // Redraw the list items when, say, a coffee becomes decaf

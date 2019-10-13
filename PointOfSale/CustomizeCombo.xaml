@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:PointOfSale"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CustomizeCombo">
+      Title="CustomizeCombo"
+      Background="Silver">
 
     <Grid>
         <Button Content="Side" HorizontalAlignment="Left" Margin="125,91,0,0" VerticalAlignment="Top" Name="sideButton" Width="157" Height="95" Click="SideClicked"/>

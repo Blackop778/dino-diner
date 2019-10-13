@@ -1,5 +1,9 @@
-﻿using System;
+﻿/* CustomizeCombo.xaml.cs
+ * Author: Nathan Faltermeier
+ */
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,42 +25,68 @@ namespace PointOfSale
     /// </summary>
     public partial class CustomizeCombo : Page
     {
-        public CretaceousCombo Combo { get; set; }
+        private CretaceousCombo combo;
 
         public CustomizeCombo() : this(null) {}
 
         public CustomizeCombo(CretaceousCombo combo)
         {
-            Combo = combo;
+            this.combo = combo;
+            combo.PropertyChanged += UpdateDrinkSideButtons;
             InitializeComponent();
             smallButton.Tag = DinoDiner.Menu.Size.Small;
             mediumButton.Tag = DinoDiner.Menu.Size.Medium;
             largeButton.Tag = DinoDiner.Menu.Size.Large;
+            UpdateDrinkSideButtons(null, null);
         }
 
+        /// <summary>
+        /// Callback for the side selection page
+        /// </summary>
         public void SideSelectionCallback(Side side)
         {
-            Combo.Side = side;
+            combo.Side = side;
         }
 
+        /// <summary>
+        /// Callback for the drink selection page
+        /// </summary>
         public void DrinkSelectionCallback(Drink drink)
         {
-            Combo.Drink = drink;
+            combo.Drink = drink;
         }
 
+        /// <summary>
+        /// Button to customize the side is clicked
+        /// </summary>
         public void SideClicked(object sender, RoutedEventArgs args)
         {
-            NavigationService.Navigate(new ComboSelection());
+            NavigationService.Navigate(new SideSelection(SideSelectionCallback, combo.Side));
         }
 
+        /// <summary>
+        /// Button to customize the drink is clicked
+        /// </summary>
         public void DrinkClicked(object sender, RoutedEventArgs args)
         {
-            NavigationService.Navigate(new ComboSelection());
+            NavigationService.Navigate(new DrinkSelection(DrinkSelectionCallback, combo.Drink));
         }
 
+        /// <summary>
+        /// Button to customize the side is clicked
+        /// </summary>
         public void SizeClicked(object sender, RoutedEventArgs args)
         {
-            Combo.Size = (DinoDiner.Menu.Size) (sender as Button).Tag;
+            combo.Size = (DinoDiner.Menu.Size) (sender as Button).Tag;
+        }
+
+        /// <summary>
+        /// Updates the displayed names of the combo's side and drink
+        /// </summary>
+        public void UpdateDrinkSideButtons(object sender, PropertyChangedEventArgs args)
+        {
+            sideButton.Content = combo.Side.BaseName();
+            drinkButton.Content = combo.Drink.BaseName();
         }
     }
 }

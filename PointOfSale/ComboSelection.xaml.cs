@@ -1,4 +1,7 @@
-﻿using System;
+﻿/* ComboSelection.xaml.cs
+ * Author: Nathan Faltermeier
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,10 +31,22 @@ namespace PointOfSale
             {
                 Button b = new Button
                 {
-                    Content = c.ToString()
+                    Content = c.ToString(),
+                    Tag = c
                 };
+                b.Click += OnButtonClicked;
                 wrapPanel.Children.Add(b);
             }
+        }
+
+        /// <summary>
+        /// Adds the chosen combo to the order
+        /// </summary>
+        public void OnButtonClicked(object sender, RoutedEventArgs args)
+        {
+            CretaceousCombo c = ((sender as Button).Tag as IMenuItem).Clone() as CretaceousCombo;
+            MainWindow.order.Add(c);
+            NavigationService.Navigate(new CustomizeCombo(c));
         }
     }
 }

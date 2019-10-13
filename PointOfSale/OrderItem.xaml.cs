@@ -1,4 +1,7 @@
-﻿using System;
+﻿/* OrderItem.xaml.cs
+ * Author: Nathan Faltermeier
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +20,7 @@ using DinoDiner.Menu;
 namespace PointOfSale
 {
     /// <summary>
-    /// Interaction logic for OrderItem.xaml
+    /// Displays an order item, with extra information than the item's name when applicable.
     /// </summary>
     public partial class OrderItem : UserControl
     {
@@ -36,17 +39,20 @@ namespace PointOfSale
             UserControl1Control.OnItemChanged(e);
         }
 
+        /// <summary>
+        /// Updates the displayed menu item's info
+        /// </summary>
         private void OnItemChanged(DependencyPropertyChangedEventArgs e)
         {
             if (Item != null)
             {
                 if (Item is CretaceousCombo c)
                 {
-                    text.Text = Item.ToString();
+                    text.Text = c.ToString() + "\n\t- " + c.Side + "\n\t- " + c.Drink;
                 }
                 else if (Item is Drink d)
                 {
-                    text.Text = Item.ToString();
+                    text.Text = d.ToString();
                 }
                 else
                 {
@@ -55,10 +61,12 @@ namespace PointOfSale
             }
         }
 
+        /// <summary>
+        /// NOTE: Item property must be set for this control to work
+        /// </summary>
         public OrderItem()
         {
             InitializeComponent();
-            
         }
     }
 }

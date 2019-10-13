@@ -1,4 +1,7 @@
-﻿using System;
+﻿/* EntreeSelection.xaml.cs
+ * Author: Nathan Faltermeier
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +39,9 @@ namespace PointOfSale
             }
         }
 
+        /// <summary>
+        /// Adds the chosen entree to the order
+        /// </summary>
         public void OnButtonClicked(object sender, RoutedEventArgs args)
         {
             MainWindow.order.Add(((sender as Button).Tag as IMenuItem).Clone() as IMenuItem);

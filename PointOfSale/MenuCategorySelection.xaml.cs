@@ -1,4 +1,7 @@
-﻿using DinoDiner.Menu;
+﻿/* MenuCategorySelection.xaml.cs
+ * Author: Nathan Faltermeier
+ */
+using DinoDiner.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,26 +29,41 @@ namespace PointOfSale
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Navigates to the given selection page
+        /// </summary>
         public void SelectCombo(object sender, RoutedEventArgs args)
         {
             NavigationService.Navigate(new ComboSelection());
         }
 
+        /// <summary>
+        /// Navigates to the given selection page
+        /// </summary>
         public void SelectEntree(object sender, RoutedEventArgs args)
         {
             NavigationService.Navigate(new EntreeSelection());
         }
 
+        /// <summary>
+        /// Navigates to the given selection page
+        /// </summary>
         public void SelectDrink(object sender, RoutedEventArgs args)
         {
-            NavigationService.Navigate(new DrinkSelection(AddItemToOrder));
+            NavigationService.Navigate(new DrinkSelection(AddItemToOrder, null));
         }
 
+        /// <summary>
+        /// Navigates to the given selection page
+        /// </summary>
         public void SelectSide(object sender, RoutedEventArgs args)
         {
-            NavigationService.Navigate(new DrinkSelection(AddItemToOrder));
+            NavigationService.Navigate(new SideSelection(AddItemToOrder, null));
         }
 
+        /// <summary>
+        /// Callback for the drink and side selection pages
+        /// </summary>
         public void AddItemToOrder(IMenuItem item)
         {
             MainWindow.order.Add(item);

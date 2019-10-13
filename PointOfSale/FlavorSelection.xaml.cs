@@ -1,4 +1,7 @@
-﻿using System;
+﻿/* FlavorSelection.xaml.cs
+ * Author: Nathan Faltermeier
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,10 @@ namespace PointOfSale
     {
         public Action<SodasaurusFlavor> Callback { get; set; }
 
+        /// <summary>
+        /// NOTE: DO NOT USE.
+        /// this constructor is required by xaml. It will not work.
+        /// </summary>
         public FlavorSelection() : this(null) { }
 
         public FlavorSelection(Action<SodasaurusFlavor> callback)
@@ -41,6 +48,9 @@ namespace PointOfSale
             }
         }
 
+        /// <summary>
+        /// Sets the sodasaurus' flavor to the chosen flavor
+        /// </summary>
         public void OnButtonClicked(object sender, RoutedEventArgs args)
         {
             Callback((SodasaurusFlavor) (sender as Button).Tag );
