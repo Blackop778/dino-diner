@@ -12,7 +12,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// Abstract menu item
     /// </summary>
-    public abstract class AbstractMenuItem : IMenuItem
+    public abstract class AbstractMenuItem : IMenuItem, IOrderItem
     {
         // Declare event handler
         public event PropertyChangedEventHandler PropertyChanged;
@@ -25,6 +25,9 @@ namespace DinoDiner.Menu
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
+        // backing variable for Special property
+        protected List<string> specialInstructions;
 
         /// <summary>
         /// Gets the item's price
@@ -40,6 +43,15 @@ namespace DinoDiner.Menu
         ///  Gets the item's ingredient list
         /// </summary>
         public abstract List<string> Ingredients { get; }
+
+        /// <summary>
+        /// Description of the item
+        /// </summary>
+        public string Description => ToString();
+        /// <summary>
+        /// Special instructions for the item
+        /// </summary>
+        public string[] Special => specialInstructions.ToArray();
 
         /// <summary>
         /// Returns a shallow copy of this object
