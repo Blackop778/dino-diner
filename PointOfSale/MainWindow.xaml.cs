@@ -34,12 +34,12 @@ namespace PointOfSale
         /// <summary>
         /// The current order
         /// </summary>
-        public static ObservableCollection<IMenuItem> order = new ObservableCollection<IMenuItem>();
+        public static Order order = new Order();
 
         public MainWindow()
         {
             InitializeComponent();
-            list.ItemsSource = order;
+            list.ItemsSource = order.Items;
         }
     }
 }

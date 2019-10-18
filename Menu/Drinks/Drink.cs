@@ -61,7 +61,10 @@ namespace DinoDiner.Menu
             return $"{Size} {BaseName()}";
         }
 
-        public List<string> SpecialList
+        /// <summary>
+        /// A list that contains instructions for the drink's ice
+        /// </summary>
+        protected List<string> SpecialList
         {
             get
             {

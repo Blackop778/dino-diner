@@ -49,6 +49,8 @@ namespace MenuTest.Entrees
             TRexKingBurger trex = new TRexKingBurger();
             trex.HoldBun();
             Assert.DoesNotContain<string>("Whole Wheat Bun", trex.Ingredients);
+            Assert.Contains("Hold Bun", trex.Special);
+            Assert.Single(trex.Special);
         }
 
         [Fact]
@@ -57,6 +59,8 @@ namespace MenuTest.Entrees
             TRexKingBurger trex = new TRexKingBurger();
             trex.HoldLettuce();
             Assert.DoesNotContain<string>("Lettuce", trex.Ingredients);
+            Assert.Contains("Hold Lettuce", trex.Special);
+            Assert.Single(trex.Special);
         }
 
         [Fact]
@@ -65,6 +69,8 @@ namespace MenuTest.Entrees
             TRexKingBurger trex = new TRexKingBurger();
             trex.HoldTomato();
             Assert.DoesNotContain<string>("Tomato", trex.Ingredients);
+            Assert.Contains("Hold Tomato", trex.Special);
+            Assert.Single(trex.Special);
         }
 
         [Fact]
@@ -73,6 +79,8 @@ namespace MenuTest.Entrees
             TRexKingBurger trex = new TRexKingBurger();
             trex.HoldOnion();
             Assert.DoesNotContain<string>("Onion", trex.Ingredients);
+            Assert.Contains("Hold Onion", trex.Special);
+            Assert.Single(trex.Special);
         }
 
         [Fact]
@@ -81,6 +89,8 @@ namespace MenuTest.Entrees
             TRexKingBurger trex = new TRexKingBurger();
             trex.HoldPickle();
             Assert.DoesNotContain<string>("Pickle", trex.Ingredients);
+            Assert.Contains("Hold Pickle", trex.Special);
+            Assert.Single(trex.Special);
         }
 
         [Fact]
@@ -89,6 +99,8 @@ namespace MenuTest.Entrees
             TRexKingBurger trex = new TRexKingBurger();
             trex.HoldKetchup();
             Assert.DoesNotContain<string>("Ketchup", trex.Ingredients);
+            Assert.Contains("Hold Ketchup", trex.Special);
+            Assert.Single(trex.Special);
         }
 
         [Fact]
@@ -97,6 +109,8 @@ namespace MenuTest.Entrees
             TRexKingBurger trex = new TRexKingBurger();
             trex.HoldMustard();
             Assert.DoesNotContain<string>("Mustard", trex.Ingredients);
+            Assert.Contains("Hold Mustard", trex.Special);
+            Assert.Single(trex.Special);
         }
 
         [Fact]
@@ -105,6 +119,8 @@ namespace MenuTest.Entrees
             TRexKingBurger trex = new TRexKingBurger();
             trex.HoldMayo();
             Assert.DoesNotContain<string>("Mayo", trex.Ingredients);
+            Assert.Contains("Hold Mayo", trex.Special);
+            Assert.Single(trex.Special);
         }
 
     }

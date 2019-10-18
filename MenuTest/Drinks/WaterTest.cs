@@ -73,6 +73,8 @@ namespace MenuTest.Drinks
             Water w = new Water();
             w.HoldIce();
             Assert.False(w.Ice);
+            Assert.Contains("Hold Ice", w.Special);
+            Assert.Single(w.Special);
         }
 
         [Fact]
@@ -84,6 +86,8 @@ namespace MenuTest.Drinks
             Assert.Contains("Water", w.Ingredients);
             Assert.Contains("Lemon", w.Ingredients);
             Assert.Equal(2, w.Ingredients.Count);
+            Assert.Contains("Add Lemon", w.Special);
+            Assert.Single(w.Special);
         }
     }
 }

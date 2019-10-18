@@ -11,7 +11,7 @@ namespace DinoDiner.Menu
     /// <summary>
     /// menu item interface
     /// </summary>
-    public interface IMenuItem : ICloneable
+    public interface IMenuItem
     {
         /// <summary>
         /// Gets the item's price

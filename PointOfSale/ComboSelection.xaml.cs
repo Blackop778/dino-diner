@@ -44,8 +44,8 @@ namespace PointOfSale
         /// </summary>
         public void OnButtonClicked(object sender, RoutedEventArgs args)
         {
-            CretaceousCombo c = ((sender as Button).Tag as IMenuItem).Clone() as CretaceousCombo;
-            MainWindow.order.Add(c);
+            CretaceousCombo c = ((sender as Button).Tag as IOrderItem).Clone() as CretaceousCombo;
+            MainWindow.order.Items.Add(c);
             NavigationService.Navigate(new CustomizeCombo(c));
         }
     }

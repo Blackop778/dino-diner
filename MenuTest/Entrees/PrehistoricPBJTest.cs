@@ -37,6 +37,9 @@ namespace MenuTest.Entrees
             PrehistoricPBJ pbj = new PrehistoricPBJ();
             pbj.HoldPeanutButter();
             Assert.DoesNotContain<string>("Peanut Butter", pbj.Ingredients);
+            Assert.Contains("Hold Peanut Butter", pbj.Special);
+            Assert.Single(pbj.Special);
+
         }
 
         [Fact]
@@ -45,6 +48,8 @@ namespace MenuTest.Entrees
             PrehistoricPBJ pbj = new PrehistoricPBJ();
             pbj.HoldJelly();
             Assert.DoesNotContain<string>("Jelly", pbj.Ingredients);
+            Assert.Contains("Hold Jelly", pbj.Special);
+            Assert.Single(pbj.Special);
         }
     }
 

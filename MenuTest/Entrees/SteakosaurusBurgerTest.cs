@@ -39,6 +39,8 @@ namespace MenuTest.Entrees
             SteakosaurusBurger sb = new SteakosaurusBurger();
             sb.HoldBun();
             Assert.DoesNotContain<string>("Whole Wheat Bun", sb.Ingredients);
+            Assert.Contains("Hold Bun", sb.Special);
+            Assert.Single(sb.Special);
         }
 
         [Fact]
@@ -47,6 +49,8 @@ namespace MenuTest.Entrees
             SteakosaurusBurger sb = new SteakosaurusBurger();
             sb.HoldPickle();
             Assert.DoesNotContain<string>("Pickle", sb.Ingredients);
+            Assert.Contains("Hold Pickle", sb.Special);
+            Assert.Single(sb.Special);
         }
 
         [Fact]
@@ -55,6 +59,8 @@ namespace MenuTest.Entrees
             SteakosaurusBurger sb = new SteakosaurusBurger();
             sb.HoldKetchup();
             Assert.DoesNotContain<string>("Ketchup", sb.Ingredients);
+            Assert.Contains("Hold Ketchup", sb.Special);
+            Assert.Single(sb.Special);
         }
 
         [Fact]
@@ -63,6 +69,8 @@ namespace MenuTest.Entrees
             SteakosaurusBurger sb = new SteakosaurusBurger();
             sb.HoldMustard();
             Assert.DoesNotContain<string>("Mustard", sb.Ingredients);
+            Assert.Contains("Hold Mustard", sb.Special);
+            Assert.Single(sb.Special);
         }
     }
 

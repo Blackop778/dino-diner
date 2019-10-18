@@ -14,6 +14,10 @@ namespace DinoDiner.Menu
     /// </summary>
     public abstract class AbstractMenuItem : IMenuItem, IOrderItem
     {
+        // backing variables
+        private double price;
+        private uint calories;
+
         // Declare event handler
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -29,12 +33,27 @@ namespace DinoDiner.Menu
         /// <summary>
         /// Gets the item's price
         /// </summary>
-        public virtual double Price { get; set; }
+        public virtual double Price {
+            get => price;
+            set
+            {
+                price = value;
+                NotifyPropertyChanged("Price");
+            }
+        }
 
         /// <summary>
         /// Gets the item's calories
         /// </summary>
-        public virtual uint Calories { get; set; }
+        public virtual uint Calories
+        {
+            get => calories;
+            set
+            {
+                calories = value;
+                NotifyPropertyChanged("Calories");
+            }
+        }
 
         /// <summary>
         ///  Gets the item's ingredient list

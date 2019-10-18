@@ -49,6 +49,8 @@ namespace MenuTest.Entrees
             }
             Assert.Equal<int>(7, nuggetCount);
             Assert.Equal<int>(7, dn.Ingredients.Count);
+            Assert.Contains("1 Extra Nuggets", dn.Special);
+            Assert.Single(dn.Special);
 
             dn.AddNugget();
             // Should be 8 nuggets
@@ -59,6 +61,9 @@ namespace MenuTest.Entrees
             }
             Assert.Equal<int>(8, nuggetCount);
             Assert.Equal<int>(8, dn.Ingredients.Count);
+            Assert.Contains("2 Extra Nuggets", dn.Special);
+            Assert.Single(dn.Special);
+
 
         }
 

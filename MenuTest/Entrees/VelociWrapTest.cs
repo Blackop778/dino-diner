@@ -39,6 +39,8 @@ namespace MenuTest.Entrees
             VelociWrap vw = new VelociWrap();
             vw.HoldDressing();
             Assert.DoesNotContain<string>("Dressing", vw.Ingredients);
+            Assert.Contains("Hold Dressing", vw.Special);
+            Assert.Single(vw.Special);
         }
 
         [Fact]
@@ -47,6 +49,8 @@ namespace MenuTest.Entrees
             VelociWrap vw = new VelociWrap();
             vw.HoldLettuce();
             Assert.DoesNotContain<string>("Lettuce", vw.Ingredients);
+            Assert.Contains("Hold Lettuce", vw.Special);
+            Assert.Single(vw.Special);
         }
 
         [Fact]
@@ -55,6 +59,8 @@ namespace MenuTest.Entrees
             VelociWrap vw = new VelociWrap();
             vw.HoldCheese();
             Assert.DoesNotContain<string>("Parmesan Cheese", vw.Ingredients);
+            Assert.Contains("Hold Cheese", vw.Special);
+            Assert.Single(vw.Special);
         }
     }
 }

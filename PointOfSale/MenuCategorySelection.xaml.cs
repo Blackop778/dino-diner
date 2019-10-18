@@ -64,9 +64,9 @@ namespace PointOfSale
         /// <summary>
         /// Callback for the drink and side selection pages
         /// </summary>
-        public void AddItemToOrder(IMenuItem item)
+        public void AddItemToOrder(IOrderItem item)
         {
-            MainWindow.order.Add(item);
+            MainWindow.order.Items.Add(item);
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DinoDiner.Menu
 {
-    interface IOrderItem : INotifyPropertyChanged
+    public interface IOrderItem : INotifyPropertyChanged, ICloneable
     {
         /// <summary>
         /// The item's price

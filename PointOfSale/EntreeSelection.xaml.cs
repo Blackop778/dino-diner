@@ -44,7 +44,7 @@ namespace PointOfSale
         /// </summary>
         public void OnButtonClicked(object sender, RoutedEventArgs args)
         {
-            MainWindow.order.Add(((sender as Button).Tag as IMenuItem).Clone() as IMenuItem);
+            MainWindow.order.Items.Add(((sender as Button).Tag as IOrderItem).Clone() as IOrderItem);
         }
     }
 }

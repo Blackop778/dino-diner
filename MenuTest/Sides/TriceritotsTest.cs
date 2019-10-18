@@ -28,6 +28,7 @@ namespace MenuTest.Sides
             Assert.Contains<string>("Salt", tt.Ingredients);
             Assert.Contains<string>("Vegetable Oil", tt.Ingredients);
             Assert.Equal<int>(3, tt.Ingredients.Count);
+            Assert.Empty(tt.Special);
         }
 
         [Fact]

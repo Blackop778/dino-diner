@@ -74,6 +74,8 @@ namespace MenuTest.Drinks
             JurassicJava j = new JurassicJava();
             j.AddIce();
             Assert.True(j.Ice);
+            Assert.Contains("Add Ice", j.Special);
+            Assert.Single(j.Special);
         }
 
         [Fact]
@@ -83,6 +85,7 @@ namespace MenuTest.Drinks
             j.AddIce();
             j.HoldIce();
             Assert.False(j.Ice);
+            Assert.Empty(j.Special);
         }
 
         [Fact]
@@ -91,6 +94,8 @@ namespace MenuTest.Drinks
             JurassicJava j = new JurassicJava();
             j.LeaveRoomForCream();
             Assert.True(j.RoomForCream);
+            Assert.Contains("Add Room For Cream", j.Special);
+            Assert.Single(j.Special);
         }
     }
 }

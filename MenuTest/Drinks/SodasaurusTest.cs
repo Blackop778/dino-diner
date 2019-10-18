@@ -68,6 +68,8 @@ namespace MenuTest.Drinks
             Sodasaurus s = new Sodasaurus();
             s.HoldIce();
             Assert.False(s.Ice);
+            Assert.Contains("Hold Ice", s.Special);
+            Assert.Single(s.Special);
         }
 
         [Fact]

@@ -28,6 +28,7 @@ namespace MenuTest.Sides
             Assert.Contains<string>("Cheese Product", mmc.Ingredients);
             Assert.Contains<string>("Pork Sausage", mmc.Ingredients);
             Assert.Equal<int>(3, mmc.Ingredients.Count);
+            Assert.Empty(mmc.Special);
         }
 
         [Fact]

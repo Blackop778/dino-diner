@@ -81,6 +81,8 @@ namespace MenuTest.Drinks
             Tyrannotea t = new Tyrannotea();
             t.HoldIce();
             Assert.False(t.Ice);
+            Assert.Contains("Hold Ice", t.Special);
+            Assert.Single(t.Special);
         }
 
         [Fact]
@@ -93,6 +95,8 @@ namespace MenuTest.Drinks
             Assert.Contains("Tea", t.Ingredients);
             Assert.Contains("Lemon", t.Ingredients);
             Assert.Equal(3, t.Ingredients.Count);
+            Assert.Contains("Add Lemon", t.Special);
+            Assert.Single(t.Special);
         }
 
         [Fact]
