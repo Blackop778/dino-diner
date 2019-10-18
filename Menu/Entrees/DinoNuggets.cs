@@ -48,6 +48,7 @@ namespace DinoDiner.Menu
             nuggets += 1;
             this.Price += .25;
             this.Calories += 59;
+            NotifyPropertyChanged("Special");
         }
 
         /// <summary>
@@ -57,6 +58,20 @@ namespace DinoDiner.Menu
         public override string ToString()
         {
             return "Dino-Nuggets";
+        }
+
+        /// <summary>
+        /// Special instructions
+        /// </summary>
+        public override string[] Special
+        {
+            get
+            {
+                if (nuggets == 6)
+                    return new string[] { };
+                else
+                    return new string[] { $"{nuggets - 6} Extra Nuggets" };
+            }
         }
     }
 }

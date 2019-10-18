@@ -21,13 +21,10 @@ namespace DinoDiner.Menu
         /// Notifies listeners that a property was changed
         /// </summary>
         /// <param name="name">Name of the changed property</param>
-        protected void OnPropertyChanged(string name)
+        protected void NotifyPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-
-        // backing variable for Special property
-        protected List<string> specialInstructions;
 
         /// <summary>
         /// Gets the item's price
@@ -48,10 +45,11 @@ namespace DinoDiner.Menu
         /// Description of the item
         /// </summary>
         public string Description => ToString();
+
         /// <summary>
         /// Special instructions for the item
         /// </summary>
-        public string[] Special => specialInstructions.ToArray();
+        public abstract string[] Special { get; }
 
         /// <summary>
         /// Returns a shallow copy of this object

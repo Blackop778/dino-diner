@@ -48,11 +48,11 @@ namespace DinoDiner.Menu
         /// </summary>
         public override Size Size
         {
-            get => size;
+            get => base.Size;
             set
             {
-                size = value;
-                switch (size)
+                base.Size = value;
+                switch (base.Size)
                 {
                     case Size.Small:
                         Price = 1.5;
@@ -67,7 +67,7 @@ namespace DinoDiner.Menu
                         Calories = 208;
                         break;
                 }
-                OnPropertyChanged("Size");
+                
             }
         }
 
@@ -76,7 +76,7 @@ namespace DinoDiner.Menu
         /// </summary>
         public SodasaurusFlavor Flavor {
             get => flavor;
-            set { flavor = value; OnPropertyChanged("Flavor"); }
+            set { flavor = value; NotifyPropertyChanged("Flavor"); NotifyPropertyChanged("Description"); }
         }
 
         /// <summary>
@@ -96,5 +96,7 @@ namespace DinoDiner.Menu
         {
             return $"{Size} {Flavor} {BaseName()}";
         }
+
+        public override string[] Special => SpecialList.ToArray();
     }
 }

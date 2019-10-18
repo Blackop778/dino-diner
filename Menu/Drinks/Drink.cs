@@ -22,7 +22,7 @@ namespace DinoDiner.Menu
         /// </summary>
         public bool Ice {
             get => ice;
-            set { ice = value; OnPropertyChanged("Ice"); }
+            set { ice = value; NotifyPropertyChanged("Ice"); NotifyPropertyChanged("Special"); }
         }
 
         /// <summary>
@@ -59,6 +59,21 @@ namespace DinoDiner.Menu
         public override string ToString()
         {
             return $"{Size} {BaseName()}";
+        }
+
+        public List<string> SpecialList
+        {
+            get
+            {
+                List<string> special = new List<string>();
+                if (Ice != IceByDefault)
+                {
+                    if (Ice) special.Add("Add Ice");
+                    else special.Add("Hold Ice");
+                }
+
+                return special;
+            }
         }
     }
 }

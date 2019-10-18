@@ -31,11 +31,11 @@ namespace DinoDiner.Menu
         /// </summary>
         public override Size Size
         {
-            get => size;
+            get => base.Size;
             set
             {
-                size = value;
-                switch (size)
+                base.Size = value;
+                switch (base.Size)
                 {
                     case Size.Small:
                         Price = .99;
@@ -50,7 +50,7 @@ namespace DinoDiner.Menu
                         Calories = 720;
                         break;
                 }
-                OnPropertyChanged("Size");
+                
             }
         }
 

@@ -59,6 +59,9 @@ namespace PointOfSale
             smallButton.Tag = Size.Small;
             mediumButton.Tag = Size.Medium;
             largeButton.Tag = Size.Large;
+
+            if (drink != null)
+                UpdateSpecialButtons();
         }
 
         /// <summary>

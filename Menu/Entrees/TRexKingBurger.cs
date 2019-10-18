@@ -81,6 +81,7 @@ namespace DinoDiner.Menu
         public void HoldBun()
         {
             this.bun = false;
+            NotifyPropertyChanged("Special");
         }
 
         /// <summary>
@@ -89,6 +90,7 @@ namespace DinoDiner.Menu
         public void HoldLettuce()
         {
             this.lettuce = false;
+            NotifyPropertyChanged("Special");
         }
 
         /// <summary>
@@ -97,6 +99,7 @@ namespace DinoDiner.Menu
         public void HoldTomato()
         {
             this.tomatoes = false;
+            NotifyPropertyChanged("Special");
         }
 
         /// <summary>
@@ -105,6 +108,7 @@ namespace DinoDiner.Menu
         public void HoldOnion()
         {
             this.onions = false;
+            NotifyPropertyChanged("Special");
         }
 
         /// <summary>
@@ -113,6 +117,7 @@ namespace DinoDiner.Menu
         public void HoldPickle()
         {
             this.pickles = false;
+            NotifyPropertyChanged("Special");
         }
 
         /// <summary>
@@ -121,6 +126,7 @@ namespace DinoDiner.Menu
         public void HoldKetchup()
         {
             this.ketchup = false;
+            NotifyPropertyChanged("Special");
         }
 
         /// <summary>
@@ -129,6 +135,7 @@ namespace DinoDiner.Menu
         public void HoldMustard()
         {
             this.mustard = false;
+            NotifyPropertyChanged("Special");
         }
 
         /// <summary>
@@ -137,6 +144,7 @@ namespace DinoDiner.Menu
         public void HoldMayo()
         {
             this.mayo = false;
+            NotifyPropertyChanged("Special");
         }
 
         /// <summary>
@@ -146,6 +154,26 @@ namespace DinoDiner.Menu
         public override string ToString()
         {
             return "T-Rex King Burger";
+        }
+
+        /// <summary>
+        /// Special instructions for the order
+        /// </summary>
+        public override string[] Special
+        {
+            get
+            {
+                List<string> special = new List<string>();
+                if (!bun) special.Add("Hold Bun");
+                if (!lettuce) special.Add("Hold Lettuce");
+                if (!tomatoes) special.Add("Hold Tomato");
+                if (!onions) special.Add("Hold Onion");
+                if (!pickles) special.Add("Hold Pickle");
+                if (!ketchup) special.Add("Hold Ketchup");
+                if (!mustard) special.Add("Hold Mustard");
+                if (!mayo) special.Add("Hold Mayo");
+                return special.ToArray();
+            }
         }
     }
 }

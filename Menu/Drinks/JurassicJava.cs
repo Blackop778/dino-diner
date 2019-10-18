@@ -27,11 +27,11 @@ namespace DinoDiner.Menu
         /// </summary>
         public override Size Size
         {
-            get => size;
+            get => base.Size;
             set
             {
-                size = value;
-                switch (size)
+                base.Size = value;
+                switch (base.Size)
                 {
                     case Size.Small:
                         Price = .59;
@@ -46,7 +46,7 @@ namespace DinoDiner.Menu
                         Calories = 8;
                         break;
                 }
-                OnPropertyChanged("Size");
+                
             }
         }
 
@@ -55,7 +55,7 @@ namespace DinoDiner.Menu
         /// </summary>
         public bool Decaf {
             get => decaf;
-            set { decaf = value; OnPropertyChanged("Decaf"); }
+            set { decaf = value; NotifyPropertyChanged("Decaf"); NotifyPropertyChanged("Description"); }
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace DinoDiner.Menu
         /// </summary>
         public bool RoomForCream {
             get => roomForCream;
-            set { roomForCream = value; OnPropertyChanged("RoomForCream"); }
+            set { roomForCream = value; NotifyPropertyChanged("RoomForCream"); NotifyPropertyChanged("Special"); }
         }
 
         /// <summary>
@@ -112,6 +112,19 @@ namespace DinoDiner.Menu
         public override string ToString()
         {
             return $"{Size} {(Decaf ? "Decaf " : "")}{BaseName()}";
+        }
+
+        /// <summary>
+        /// Special instructions for the order item
+        /// </summary>
+        public override string[] Special
+        {
+            get
+            {
+                List<string> list = SpecialList;
+                if (RoomForCream) list.Add("Keep Room For Cream");
+                return list.ToArray();
+            }
         }
     }
 }

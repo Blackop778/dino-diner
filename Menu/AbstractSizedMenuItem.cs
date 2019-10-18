@@ -24,12 +24,19 @@ namespace DinoDiner.Menu
     public abstract class AbstractSizedMenuItem : AbstractMenuItem
     {
         // Backing variable
-        protected Size size;
+        private Size size;
 
         /// <summary>
         /// Gets or sets the size
         /// </summary>
-        public abstract Size Size { get; set; }
+        public virtual Size Size {
+            get => size;
+            set {
+                size = value;
+                NotifyPropertyChanged("Size");
+                NotifyPropertyChanged("Description");
+            }
+        }
 
         /// <summary>
         /// Creates a small menu item

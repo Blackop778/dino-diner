@@ -41,5 +41,10 @@ namespace DinoDiner.Menu
         {
             return "Pterodactyl Wings";
         }
+
+        /// <summary>
+        /// Special instructions for this order item
+        /// </summary>
+        public override string[] Special => new string[] { };
     }
 }

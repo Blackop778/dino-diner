@@ -34,22 +34,12 @@ namespace PointOfSale
         /// <summary>
         /// The current order
         /// </summary>
-        public static BindingList<IMenuItem> order = new BindingList<IMenuItem>();
+        public static ObservableCollection<IMenuItem> order = new ObservableCollection<IMenuItem>();
 
         public MainWindow()
         {
             InitializeComponent();
             list.ItemsSource = order;
-            order.ListChanged += ListBox_ListChanged;
-        }
-
-        /// <summary>
-        /// Redraw order list in UI
-        /// </summary>
-        public void ListBox_ListChanged(object sender, ListChangedEventArgs args)
-        {
-            // Redraw the list items when, say, a coffee becomes decaf
-            list.Items.Refresh();
         }
     }
 }

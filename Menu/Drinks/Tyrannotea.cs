@@ -45,11 +45,11 @@ namespace DinoDiner.Menu
         /// </summary>
         public override Size Size
         {
-            get => size;
+            get => base.Size;
             set
             {
-                size = value;
-                switch (size)
+                base.Size = value;
+                switch (base.Size)
                 {
                     case Size.Small:
                         Price = .99;
@@ -62,7 +62,7 @@ namespace DinoDiner.Menu
                         break;
                 }
                 Calories = CalculateCalories();
-                OnPropertyChanged("Size");
+                
             }
         }
 
@@ -76,7 +76,8 @@ namespace DinoDiner.Menu
             {
                 sweet = value;
                 Calories = CalculateCalories();
-                OnPropertyChanged("Sweet");
+                NotifyPropertyChanged("Sweet");
+                NotifyPropertyChanged("Description");
             }
         }
 
@@ -85,7 +86,7 @@ namespace DinoDiner.Menu
         /// </summary>
         public bool Lemon {
             get => lemon;
-            set { lemon = value; OnPropertyChanged("Lemon"); }
+            set { lemon = value; NotifyPropertyChanged("Lemon"); NotifyPropertyChanged("Special"); }
         }
 
         /// <summary>
@@ -95,7 +96,7 @@ namespace DinoDiner.Menu
         private uint CalculateCalories()
         {
             uint calories = 0;
-            switch (Size)
+            switch (base.Size)
             {
                 case Size.Small:
                     calories = 8;
@@ -138,6 +139,19 @@ namespace DinoDiner.Menu
         public override string ToString()
         {
             return $"{Size} {(Sweet ? "Sweet " : "")}{BaseName()}";
+        }
+
+        /// <summary>
+        /// Special instructions for this order item
+        /// </summary>
+        public override string[] Special
+        {
+            get
+            {
+                List<string> list = SpecialList;
+                if (Lemon) list.Add("Add Lemon");
+                return list.ToArray();
+            }
         }
     }
 }

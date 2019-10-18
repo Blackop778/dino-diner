@@ -23,5 +23,7 @@ namespace DinoDiner.Menu
         {
             return $"{Size} {BaseName()}";
         }
+
+        public override string[] Special => new string[] { };
     }
 }

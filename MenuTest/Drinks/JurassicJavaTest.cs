@@ -10,7 +10,7 @@ namespace MenuTest.Drinks
         public void ShouldHaveCorrectDefaultPrice()
         {
             JurassicJava j = new JurassicJava();
-            Assert.Equal(.59, j.Price);
+            Assert.Equal<double>(.59, j.Price);
         }
 
         [Fact]

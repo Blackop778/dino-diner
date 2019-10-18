@@ -50,6 +50,7 @@ namespace DinoDiner.Menu
         public void HoldPeanutButter()
         {
             this.peanutButter = false;
+            NotifyPropertyChanged("Special");
         }
 
         /// <summary>
@@ -58,6 +59,7 @@ namespace DinoDiner.Menu
         public void HoldJelly()
         {
             this.jelly = false;
+            NotifyPropertyChanged("Special");
         }
 
         /// <summary>
@@ -67,6 +69,20 @@ namespace DinoDiner.Menu
         public override string ToString()
         {
             return "Prehistoric PB&J";
+        }
+
+        /// <summary>
+        /// Special instructions for order item
+        /// </summary>
+        public override string[] Special
+        {
+            get
+            {
+                List<string> list = new List<string>();
+                if (!peanutButter) list.Add("Hold Peanut Butter");
+                if (!jelly) list.Add("Hold Jelly");
+                return list.ToArray();
+            }
         }
     }
 }

@@ -10,7 +10,10 @@
         <ListBox DockPanel.Dock="Right" Width="200" Background="LightSteelBlue" Name="list">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <local:OrderItem Item="{Binding}"/>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Path=Description}"/>
+                        <ListBox ItemsSource="{Binding Path=Special}"/>
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

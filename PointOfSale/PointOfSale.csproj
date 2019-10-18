@@ -112,17 +112,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OrderItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MenuCategorySelection.xaml.cs">
       <DependentUpon>MenuCategorySelection.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OrderItem.xaml.cs">
-      <DependentUpon>OrderItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

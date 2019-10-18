@@ -16,8 +16,8 @@ namespace DinoDiner.Menu
     {
         //backing variables
         private Entree entree;
-        private Side side = new MeteorMacAndCheese();
-        private Drink drink = new Sodasaurus();
+        private Side side;
+        private Drink drink;
 
         /// <summary>
         /// The combo's entree item
@@ -29,7 +29,8 @@ namespace DinoDiner.Menu
                 if (entree != null) entree.PropertyChanged -= OnItemPropertyChanged;
                 entree = value;
                 if (entree != null) entree.PropertyChanged += OnItemPropertyChanged;
-                OnPropertyChanged("Entree");
+                NotifyPropertyChanged("Entree");
+                NotifyPropertyChanged("Special");
             }
         }
         /// <summary>
@@ -43,7 +44,8 @@ namespace DinoDiner.Menu
                 if (side != null) side.PropertyChanged -= OnItemPropertyChanged;
                 side = value;
                 if (side != null) side.PropertyChanged += OnItemPropertyChanged;
-                OnPropertyChanged("Side");
+                NotifyPropertyChanged("Side");
+                NotifyPropertyChanged("Special");
             }
         }
         /// <summary>
@@ -57,7 +59,8 @@ namespace DinoDiner.Menu
                 if (drink != null) drink.PropertyChanged -= OnItemPropertyChanged;
                 drink = value;
                 if (drink != null) drink.PropertyChanged += OnItemPropertyChanged;
-                OnPropertyChanged("Drink");
+                NotifyPropertyChanged("Drink");
+                NotifyPropertyChanged("Special");
             }
         }
         /// <summary>
@@ -93,12 +96,16 @@ namespace DinoDiner.Menu
         /// The size of the combo. Sets the side and drink's sizes.
         /// </summary>
         public override Size Size {
-            get => size;
+            get => base.Size;
             set
             {
-                Side.Size = value;
-                Drink.Size = value;
-                size = value;
+                // Side and Drink will be null when AbstractSizedMenuItem's constructor is called
+                // and tries to set size to Small as Combo constructor hasn't been called by then
+                if (Side != null)
+                    Side.Size = value;
+                if (Drink != null)
+                    Drink.Size = value;
+                base.Size = value;
             }
         }
 
@@ -118,6 +125,9 @@ namespace DinoDiner.Menu
         public CretaceousCombo(Entree entree)
         {
             Entree = entree;
+            Side = new MezzorellaSticks();
+            Drink = new Sodasaurus();
+            Size = Size.Small;
         }
 
         /// <summary>
@@ -127,7 +137,47 @@ namespace DinoDiner.Menu
         /// <param name="args"></param>
         private void OnItemPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            OnPropertyChanged(args.PropertyName);
+            NotifyPropertyChanged(args.PropertyName);
+            // Whatever was changed probably changed the special as well
+            if (args.PropertyName != "Special" && args.PropertyName != "Price" && args.PropertyName != "Calories")
+                NotifyPropertyChanged("Special");
+        }
+
+        /// <summary>
+        /// Special Instructions for this item
+        /// </summary>
+        public override string[] Special
+        {
+            get
+            {
+                List<string> special = new List<string>();
+                special.AddRange(Entree.Special);
+                special.Add(Drink.ToString());
+                special.AddRange(Drink.Special);
+                special.Add(Side.ToString());
+                special.AddRange(Side.Special);
+                return special.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Performs a shallow clone and also clones the combo's entree, drink, and side
+        /// </summary>
+        /// <returns></returns>
+        public override object Clone()
+        {
+            object ret = base.Clone();
+
+            if (ret is CretaceousCombo c)
+            {
+                // Ensures that the property changed listeners on the entree, side, and drink refer to the new instance of Combo
+                // instead of the one that is being cloned since the property setter resets the listeners
+                c.Entree = (Entree) c.Entree.Clone();
+                c.Drink = (Drink) c.Drink.Clone();
+                c.Side = (Side) c.Side.Clone();
+            }
+
+            return ret;
         }
     }
 }

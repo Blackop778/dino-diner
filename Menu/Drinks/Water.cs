@@ -42,13 +42,13 @@ namespace DinoDiner.Menu
         /// </summary>
         public override Size Size
         {
-            get => size;
+            get => base.Size;
             set
             {
-                size = value;
+                base.Size = value;
                 Price = .10;
                 Calories = 0;
-                OnPropertyChanged("Size");
+                
             }
         }
 
@@ -57,7 +57,7 @@ namespace DinoDiner.Menu
         /// </summary>
         public bool Lemon {
             get => lemon;
-            set { lemon = value; OnPropertyChanged("Lemon"); }
+            set { lemon = value; NotifyPropertyChanged("Lemon"); NotifyPropertyChanged("Special"); }
         }
 
         /// <summary>
@@ -75,6 +75,19 @@ namespace DinoDiner.Menu
         public override string BaseName()
         {
             return "Water";
+        }
+
+        /// <summary>
+        /// Special instructions for this order item
+        /// </summary>
+        public override string[] Special
+        {
+            get
+            {
+                List<string> list = SpecialList;
+                if (Lemon) list.Add("Add Lemon");
+                return list.ToArray();
+            }
         }
     }
 }
