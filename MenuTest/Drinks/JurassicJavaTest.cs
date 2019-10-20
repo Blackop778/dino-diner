@@ -94,8 +94,21 @@ namespace MenuTest.Drinks
             JurassicJava j = new JurassicJava();
             j.LeaveRoomForCream();
             Assert.True(j.RoomForCream);
-            Assert.Contains("Add Room For Cream", j.Special);
+            Assert.Contains("Leave Room For Cream", j.Special);
             Assert.Single(j.Special);
+        }
+
+        [Fact]
+        public void ShouldCombineSpecialInstructions()
+        {
+            JurassicJava j = new JurassicJava();
+
+            j.LeaveRoomForCream();
+            j.AddIce();
+
+            Assert.Contains("Leave Room For Cream", j.Special);
+            Assert.Contains("Add Ice", j.Special);
+            Assert.Equal(2, j.Special.Length);
         }
     }
 }

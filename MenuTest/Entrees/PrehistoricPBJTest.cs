@@ -51,6 +51,19 @@ namespace MenuTest.Entrees
             Assert.Contains("Hold Jelly", pbj.Special);
             Assert.Single(pbj.Special);
         }
+
+        [Fact]
+        public void ShouldCombineSpecialInstructions()
+        {
+            PrehistoricPBJ p = new PrehistoricPBJ();
+
+            p.HoldJelly();
+            p.HoldPeanutButter();
+
+            Assert.Contains("Hold Jelly", p.Special);
+            Assert.Contains("Hold Peanut Butter", p.Special);
+            Assert.Equal(2, p.Special.Length);
+        }
     }
 
 }

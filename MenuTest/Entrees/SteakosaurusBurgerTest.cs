@@ -72,6 +72,23 @@ namespace MenuTest.Entrees
             Assert.Contains("Hold Mustard", sb.Special);
             Assert.Single(sb.Special);
         }
+
+        [Fact]
+        public void ShouldCombineSpecialInstructions()
+        {
+            SteakosaurusBurger s = new SteakosaurusBurger();
+
+            s.HoldBun();
+            s.HoldKetchup();
+            s.HoldMustard();
+            s.HoldPickle();
+
+            Assert.Contains("Hold Bun", s.Special);
+            Assert.Contains("Hold Ketchup", s.Special);
+            Assert.Contains("Hold Mustard", s.Special);
+            Assert.Contains("Hold Pickle", s.Special);
+            Assert.Equal(4, s.Special.Length);
+        }
     }
 
 }

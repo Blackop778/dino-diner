@@ -123,5 +123,18 @@ namespace MenuTest.Drinks
             t.Sweet = false;
             Assert.Equal<uint>(32, t.Calories);
         }
+
+        [Fact]
+        public void ShouldCombineSpecialInstructions()
+        {
+            Tyrannotea t = new Tyrannotea();
+
+            t.AddLemon();
+            t.HoldIce();
+
+            Assert.Contains("Add Lemon", t.Special);
+            Assert.Contains("Hold Ice", t.Special);
+            Assert.Equal(2, t.Special.Length);
+        }
     }
 }

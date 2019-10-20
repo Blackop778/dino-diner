@@ -122,7 +122,7 @@ namespace DinoDiner.Menu
             get
             {
                 List<string> list = SpecialList;
-                if (RoomForCream) list.Add("Add Room For Cream");
+                if (RoomForCream) list.Add("Leave Room For Cream");
                 return list.ToArray();
             }
         }

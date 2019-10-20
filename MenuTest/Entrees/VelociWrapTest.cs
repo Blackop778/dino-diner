@@ -62,5 +62,20 @@ namespace MenuTest.Entrees
             Assert.Contains("Hold Cheese", vw.Special);
             Assert.Single(vw.Special);
         }
+
+        [Fact]
+        public void ShouldCombineSpecialInstructions()
+        {
+            VelociWrap v = new VelociWrap();
+
+            v.HoldCheese();
+            v.HoldDressing();
+            v.HoldLettuce();
+
+            Assert.Contains("Hold Cheese", v.Special);
+            Assert.Contains("Hold Dressing", v.Special);
+            Assert.Contains("Hold Lettuce", v.Special);
+            Assert.Equal(3, v.Special.Length);
+        }
     }
 }

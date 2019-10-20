@@ -89,5 +89,18 @@ namespace MenuTest.Drinks
             Assert.Contains("Add Lemon", w.Special);
             Assert.Single(w.Special);
         }
+
+        [Fact]
+        public void ShouldCombineSpecialInstructions()
+        {
+            Water w = new Water();
+
+            w.AddLemon();
+            w.HoldIce();
+
+            Assert.Contains("Add Lemon", w.Special);
+            Assert.Contains("Hold Ice", w.Special);
+            Assert.Equal(2, w.Special.Length);
+        }
     }
 }

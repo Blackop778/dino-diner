@@ -31,6 +31,7 @@ namespace DinoDiner.Menu
                 if (entree != null) entree.PropertyChanged += OnItemPropertyChanged;
                 NotifyPropertyChanged("Entree");
                 NotifyPropertyChanged("Special");
+                NotifyPropertyChanged("Description");
             }
         }
         /// <summary>

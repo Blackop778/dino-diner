@@ -123,6 +123,31 @@ namespace MenuTest.Entrees
             Assert.Single(trex.Special);
         }
 
+        [Fact]
+        public void ShouldCombineSpecialInstructions()
+        {
+            TRexKingBurger t = new TRexKingBurger();
+
+            t.HoldBun();
+            t.HoldKetchup();
+            t.HoldLettuce();
+            t.HoldMayo();
+            t.HoldMustard();
+            t.HoldOnion();
+            t.HoldPickle();
+            t.HoldTomato();
+
+            Assert.Contains("Hold Bun", t.Special);
+            Assert.Contains("Hold Ketchup", t.Special);
+            Assert.Contains("Hold Lettuce", t.Special);
+            Assert.Contains("Hold Mayo", t.Special);
+            Assert.Contains("Hold Mustard", t.Special);
+            Assert.Contains("Hold Onion", t.Special);
+            Assert.Contains("Hold Pickle", t.Special);
+            Assert.Contains("Hold Tomato", t.Special);
+            Assert.Equal(8, t.Special.Length);
+        }
+
     }
 
 }

@@ -49,6 +49,7 @@ namespace DinoDiner.Menu
         public Order()
         {
             Items = new ObservableCollection<IOrderItem>();
+            SalesTaxRate = .1;
         }
     }
 }
