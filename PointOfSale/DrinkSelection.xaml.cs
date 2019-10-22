@@ -79,6 +79,9 @@ namespace PointOfSale
         /// </summary>
         public void SizeClicked(object sender, RoutedEventArgs args)
         {
+            if (drink == null)
+                return;
+
             drink.Size = (Size) (sender as Button).Tag;
         }
 
@@ -162,6 +165,9 @@ namespace PointOfSale
         /// </summary>
         public void ToggleIce(object sender, RoutedEventArgs args)
         {
+            if (drink == null)
+                return;
+
             drink.Ice = !drink.Ice;
             UpdateSpecialButtons();
         }
@@ -171,6 +177,9 @@ namespace PointOfSale
         /// </summary>
         public void ToggleLemon(object sender, RoutedEventArgs args)
         {
+            if (drink == null)
+                return;
+
             if (drink is Water w)
             {
                 w.Lemon = !w.Lemon;
@@ -188,6 +197,9 @@ namespace PointOfSale
         /// </summary>
         public void FlavorClicked(object sender, RoutedEventArgs args)
         {
+            if (drink == null)
+                return;
+
             NavigationService.Navigate(new FlavorSelection(FlavorCallback));
         }
 
@@ -209,6 +221,9 @@ namespace PointOfSale
         /// </summary>
         public void ToggleSweet(object sender, RoutedEventArgs args)
         {
+            if (drink == null)
+                return;
+
             if (drink is Tyrannotea t)
             {
                 t.Sweet = !t.Sweet;
@@ -221,6 +236,9 @@ namespace PointOfSale
         /// </summary>
         public void ToggleCream(object sender, RoutedEventArgs args)
         {
+            if (drink == null)
+                return;
+
             if (drink is JurassicJava j)
             {
                 j.RoomForCream = !j.RoomForCream;
@@ -233,6 +251,9 @@ namespace PointOfSale
         /// </summary>
         public void ToggleDecaf(object sender, RoutedEventArgs args)
         {
+            if (drink == null)
+                return;
+
             if (drink is JurassicJava j)
             {
                 j.Decaf = !j.Decaf;

@@ -75,6 +75,9 @@ namespace PointOfSale
         /// </summary>
         public void SizeClicked(object sender, RoutedEventArgs args)
         {
+            if (side == null)
+                return;
+
             side.Size = (Size)(sender as Button).Tag;
         }
     }
