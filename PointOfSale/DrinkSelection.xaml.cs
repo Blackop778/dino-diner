@@ -220,7 +220,16 @@ namespace PointOfSale
         /// </summary>
         public void FlavorClicked(object sender, RoutedEventArgs args)
         {
-            NavigationService.Navigate(new FlavorSelection(FlavorCallback));
+            if (DataContext is Order order)
+            {
+                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink)
+                {
+                    if (drink is Sodasaurus s)
+                    {
+                        NavigationService.Navigate(new FlavorSelection(FlavorCallback));
+                    }
+                }
+            }
         }
 
         /// <summary>
