@@ -44,7 +44,15 @@ namespace PointOfSale
         /// </summary>
         public void OnButtonClicked(object sender, RoutedEventArgs args)
         {
-            MainWindow.order.Items.Add(((sender as Button).Tag as IOrderItem).Clone() as IOrderItem);
+            if (DataContext is Order order)
+            {
+                order.Items.Add(((sender as Button).Tag as IOrderItem).Clone() as IOrderItem);
+                CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
+            }
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
         }
     }
 }

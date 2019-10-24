@@ -75,10 +75,18 @@ namespace PointOfSale
         /// </summary>
         public void SizeClicked(object sender, RoutedEventArgs args)
         {
-            if (side == null)
-                return;
+            if (DataContext is Order order)
+            {
+                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Side side)
+                {
+                    side.Size = (Size)(sender as Button).Tag;
 
-            side.Size = (Size)(sender as Button).Tag;
+                    if (NavigationService.CanGoBack)
+                    {
+                        NavigationService.GoBack();
+                    }
+                }
+            }
         }
     }
 }

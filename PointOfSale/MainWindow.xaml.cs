@@ -34,12 +34,44 @@ namespace PointOfSale
         /// <summary>
         /// The current order
         /// </summary>
-        public static Order order = new Order();
+        // public static Order order = new Order();
 
         public MainWindow()
         {
             InitializeComponent();
-            list.ItemsSource = order.Items;
+            if (DataContext is Order order)
+            {
+                orderControl.itemsList.SelectionChanged += ItemsList_SelectionChanged;
+
+                //order.Items.Add(new Sodasaurus { Size = DinoDiner.Menu.Size.Large, Ice = false });
+                //CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
+            }
+        }
+
+        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (frame.Content is DrinkSelection d)
+            {
+                d.UpdateSpecialButtons();
+            }
+        }
+
+        private void PassOnDataContext()
+        {
+            if (frame.Content is Page p)
+            {
+                p.DataContext = DataContext;
+            }
+        }
+
+        private void frame_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            PassOnDataContext();
+        }
+
+        private void frame_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            PassOnDataContext();
         }
     }
 }

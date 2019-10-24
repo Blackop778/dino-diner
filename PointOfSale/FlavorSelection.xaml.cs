@@ -53,7 +53,11 @@ namespace PointOfSale
         /// </summary>
         public void OnButtonClicked(object sender, RoutedEventArgs args)
         {
-            Callback((SodasaurusFlavor) (sender as Button).Tag );
+            Callback((SodasaurusFlavor) (sender as Button).Tag);
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
         }
     }
 }

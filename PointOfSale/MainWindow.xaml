@@ -4,19 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PointOfSale"
+        xmlns:menu="clr-namespace:DinoDiner.Menu;assembly=Menu"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
+    <Window.DataContext>
+        <menu:Order/>
+        <!--menu:Menu/-->
+    </Window.DataContext>
     <DockPanel>
-        <ListBox DockPanel.Dock="Right" Width="200" Background="LightSteelBlue" Name="list">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Path=Description}"/>
-                        <ListBox ItemsSource="{Binding Path=Special}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Frame Source="MenuCategorySelection.xaml"></Frame>
+        <local:OrderControl x:Name="orderControl" Width="200" DockPanel.Dock="Right"/>
+        <Frame Source="MenuCategorySelection.xaml" Name="frame" LoadCompleted="frame_LoadCompleted" DataContextChanged="frame_DataContextChanged"/>
     </DockPanel>
 </Window>
