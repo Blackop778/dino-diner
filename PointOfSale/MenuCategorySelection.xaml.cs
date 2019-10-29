@@ -66,9 +66,9 @@ namespace PointOfSale
         /// </summary>
         public void AddItemToOrder(IOrderItem item)
         {
-            ((Order)DataContext).Items.Add(item);
             if (DataContext is Order order)
             {
+                order.Items.Add(item);
                 CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
             }
         }
