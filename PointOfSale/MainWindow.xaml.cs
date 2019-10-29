@@ -39,13 +39,7 @@ namespace PointOfSale
         public MainWindow()
         {
             InitializeComponent();
-            if (DataContext is Order order)
-            {
-                orderControl.itemsList.SelectionChanged += ItemsList_SelectionChanged;
-
-                //order.Items.Add(new Sodasaurus { Size = DinoDiner.Menu.Size.Large, Ice = false });
-                //CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
-            }
+            orderControl.itemsList.SelectionChanged += ItemsList_SelectionChanged;
         }
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)

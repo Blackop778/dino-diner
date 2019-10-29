@@ -82,6 +82,32 @@ namespace DinoDiner.Menu
         /// </summary>
         private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (e.NewItems != null)
+            {
+                foreach (IOrderItem i in e.NewItems)
+                {
+                    i.PropertyChanged += OnThingInItemsPropertyChanged;
+                }
+            }
+
+            if (e.OldItems != null)
+            {
+                foreach (IOrderItem i in e.OldItems)
+                {
+                    i.PropertyChanged -= OnThingInItemsPropertyChanged;
+                }
+            }
+
+            OnStuffInItemsChanged();
+        }
+
+        private void OnThingInItemsPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnStuffInItemsChanged();
+        }
+
+        private void OnStuffInItemsChanged()
+        {
             NotifyPropertyChanged("SubtotalCost");
             NotifyPropertyChanged("SalesTaxCost");
             NotifyPropertyChanged("TotalCost");
