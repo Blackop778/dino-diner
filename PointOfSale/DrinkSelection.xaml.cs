@@ -25,24 +25,23 @@ namespace PointOfSale
     /// </summary>
     public partial class DrinkSelection : Page
     {
-        // The drink the page has selected
-        //private Drink drink;
-        public Action<Drink> Callback { get; set; }
+        /// <summary>
+        /// Whether or not this page is modifying a combo
+        /// </summary>
+        public bool ModifyingCombo { get; set; }
 
         /// <summary>
-        /// NOTE: DO NOT USE.
-        /// this constructor is required by xaml. It will not work.
+        /// Creates a drink selection that does not modify a combo. Lets the user choose the size and ice, lemon, flavor, sweet, cream, decaf statuses as appropriate.
         /// </summary>
-        public DrinkSelection() : this(null, null) { }
+        public DrinkSelection() : this(false) { }
 
         /// <summary>
-        /// Creates a drink selection page. Lets the user choose the size and ice, lemon, flavor, sweet, cream, decaf statuses as appropriate.
+        /// Creates a drink selection page that may or may not be modifying a combo. Lets the user choose the size and ice, lemon, flavor, sweet, cream, decaf statuses as appropriate.
         /// </summary>
-        /// <param name="callback">Gets called with the pages instance of the drink when a new drink is added to the order</param>
-        /// <param name="drink">A drink for the page to start with, can be null</param>
-        public DrinkSelection(Action<Drink> callback, Drink drink)
+        /// <param name="ModifyingCombo">Whether or not this page is modifying a combo</param>
+        public DrinkSelection(bool ModifyingCombo)
         {
-            Callback = callback;
+            this.ModifyingCombo = ModifyingCombo;
             InitializeComponent();
             foreach (Drink d in MainWindow.menu.AvailableDrinks)
             {
@@ -59,7 +58,6 @@ namespace PointOfSale
             mediumButton.Tag = Size.Medium;
             largeButton.Tag = Size.Large;
 
-            //if (drink != null)
             UpdateSpecialButtons();
         }
 
@@ -70,7 +68,7 @@ namespace PointOfSale
         {
             if (DataContext is Order order)
             {
-                Callback(((sender as Button).Tag as Drink).Clone() as Drink);
+                DrinkSelected(((sender as Button).Tag as Drink).Clone() as Drink);
                 UpdateSpecialButtons();
             }
         }
@@ -80,12 +78,10 @@ namespace PointOfSale
         /// </summary>
         public void SizeClicked(object sender, RoutedEventArgs args)
         {
-            if (DataContext is Order order)
+            Drink drink = GetCurrentDrink();
+            if (drink != null)
             {
-                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink)
-                {
-                    drink.Size = (Size)(sender as Button).Tag;
-                }
+                drink.Size = (Size)(sender as Button).Tag;
             }
         }
 
@@ -94,86 +90,82 @@ namespace PointOfSale
         /// </summary>
         internal void UpdateSpecialButtons()
         {
-            if (DataContext is Order order)
+            Drink drink = GetCurrentDrink();
+            if (drink != null)
+                iceButton.Content = drink.Ice ? "Hold Ice" : "Add Ice";
+
+            bool? lemon = null;
+            bool? flavor = null;
+            bool? sweet = null;
+            bool? cream = null;
+            bool? decaf = null;
+
+            if (drink is Water w)
             {
-                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink)
-                {
-                    iceButton.Content = drink.Ice ? "Hold Ice" : "Add Ice";
+                lemon = w.Lemon;
+            }
+            else if (drink is Tyrannotea t)
+            {
+                lemon = t.Lemon;
+                sweet = t.Sweet;
+            }
+            else if (drink is Sodasaurus)
+            {
+                flavor = true;
+            }
+            else if (drink is JurassicJava j)
+            {
+                cream = j.RoomForCream;
+                decaf = j.Decaf;
+            }
 
-                    bool? lemon = null;
-                    bool? flavor = null;
-                    bool? sweet = null;
-                    bool? cream = null;
-                    bool? decaf = null;
+            if (lemon != null)
+            {
+                lemonButton.Visibility = Visibility.Visible;
+                lemonButton.Content = lemon.Value ? "Hold Lemon" : "Add Lemon";
+            }
+            else
+            {
+                lemonButton.Visibility = Visibility.Collapsed;
+            }
 
-                    if (drink is Water w)
-                    {
-                        lemon = w.Lemon;
-                    }
-                    else if (drink is Tyrannotea t)
-                    {
-                        lemon = t.Lemon;
-                        sweet = t.Sweet;
-                    }
-                    else if (drink is Sodasaurus)
-                    {
-                        flavor = true;
-                    }
-                    else if (drink is JurassicJava j)
-                    {
-                        cream = j.RoomForCream;
-                        decaf = j.Decaf;
-                    }
+            if (flavor != null)
+            {
+                flavorButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                flavorButton.Visibility = Visibility.Collapsed;
+            }
 
-                    if (lemon != null)
-                    {
-                        lemonButton.Visibility = Visibility.Visible;
-                        lemonButton.Content = lemon.Value ? "Hold Lemon" : "Add Lemon";
-                    }
-                    else
-                    {
-                        lemonButton.Visibility = Visibility.Collapsed;
-                    }
+            if (sweet != null)
+            {
+                sweetButton.Visibility = Visibility.Visible;
+                sweetButton.Content = sweet.Value ? "Unsweeten" : "Make Sweet";
+            }
+            else
+            {
+                sweetButton.Visibility = Visibility.Collapsed;
+            }
 
-                    if (flavor != null)
-                    {
-                        flavorButton.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        flavorButton.Visibility = Visibility.Collapsed;
-                    }
+            if (cream != null)
+            {
+                creamButton.Visibility = Visibility.Visible;
+                creamButton.Content = cream.Value ? "Hold Cream" : "Add Cream";
+            }
+            else
+            {
+                creamButton.Visibility = Visibility.Collapsed;
+            }
 
-                    if (sweet != null)
-                    {
-                        sweetButton.Visibility = Visibility.Visible;
-                        sweetButton.Content = sweet.Value ? "Unsweeten" : "Make Sweet";
-                    }
-                    else
-                    {
-                        sweetButton.Visibility = Visibility.Collapsed;
-                    }
-
-                    if (cream != null)
-                    {
-                        creamButton.Visibility = Visibility.Visible;
-                        creamButton.Content = cream.Value ? "Hold Cream" : "Add Cream";
-                    }
-                    else
-                    {
-                        creamButton.Visibility = Visibility.Collapsed;
-                    }
-
-                    if (decaf != null)
-                    {
-                        decafButton.Visibility = Visibility.Visible;
-                        decafButton.Content = decaf.Value ? "Make Not Decaf" : "Make Decaf";
-                    }
-                    else
-                    {
-                        decafButton.Visibility = Visibility.Collapsed;
-                    }
-                }
+            if (decaf != null)
+            {
+                decafButton.Visibility = Visibility.Visible;
+                decafButton.Content = decaf.Value ? "Make Not Decaf" : "Make Decaf";
+            }
+            else
+            {
+                decafButton.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -182,13 +174,11 @@ namespace PointOfSale
         /// </summary>
         public void ToggleIce(object sender, RoutedEventArgs args)
         {
-            if (DataContext is Order order)
+            Drink drink = GetCurrentDrink();
+            if (drink != null)
             {
-                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink)
-                {
-                    drink.Ice = !drink.Ice;
-                    UpdateSpecialButtons();
-                }
+                drink.Ice = !drink.Ice;
+                UpdateSpecialButtons();
             }
         }
 
@@ -197,21 +187,16 @@ namespace PointOfSale
         /// </summary>
         public void ToggleLemon(object sender, RoutedEventArgs args)
         {
-            if (DataContext is Order order)
+            Drink drink = GetCurrentDrink();
+            if (drink is Water w)
             {
-                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink)
-                {
-                    if (drink is Water w)
-                    {
-                        w.Lemon = !w.Lemon;
-                        UpdateSpecialButtons();
-                    }
-                    else if (drink is Tyrannotea t)
-                    {
-                        t.Lemon = !t.Lemon;
-                        UpdateSpecialButtons();
-                    }
-                }
+                w.Lemon = !w.Lemon;
+                UpdateSpecialButtons();
+            }
+            else if (drink is Tyrannotea t)
+            {
+                t.Lemon = !t.Lemon;
+                UpdateSpecialButtons();
             }
         }
 
@@ -220,15 +205,9 @@ namespace PointOfSale
         /// </summary>
         public void FlavorClicked(object sender, RoutedEventArgs args)
         {
-            if (DataContext is Order order)
+            if (GetCurrentDrink() is Sodasaurus s)
             {
-                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink)
-                {
-                    if (drink is Sodasaurus s)
-                    {
-                        NavigationService.Navigate(new FlavorSelection(FlavorCallback));
-                    }
-                }
+                NavigationService.Navigate(new FlavorSelection(FlavorCallback));
             }
         }
 
@@ -238,16 +217,10 @@ namespace PointOfSale
         /// <param name="flavor">The sodasaurus drink's flavor</param>
         public void FlavorCallback(SodasaurusFlavor flavor)
         {
-            if (DataContext is Order order)
+            if (GetCurrentDrink() is Sodasaurus s)
             {
-                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink)
-                {
-                    if (drink is Sodasaurus s)
-                    {
-                        s.Flavor = flavor;
-                        UpdateSpecialButtons();
-                    }
-                }
+                s.Flavor = flavor;
+                UpdateSpecialButtons();
             }
         }
 
@@ -256,16 +229,10 @@ namespace PointOfSale
         /// </summary>
         public void ToggleSweet(object sender, RoutedEventArgs args)
         {
-            if (DataContext is Order order)
+            if (GetCurrentDrink() is Tyrannotea t)
             {
-                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink)
-                {
-                    if (drink is Tyrannotea t)
-                    {
-                        t.Sweet = !t.Sweet;
-                        UpdateSpecialButtons();
-                    }
-                }
+                t.Sweet = !t.Sweet;
+                UpdateSpecialButtons();
             }
         }
 
@@ -274,16 +241,10 @@ namespace PointOfSale
         /// </summary>
         public void ToggleCream(object sender, RoutedEventArgs args)
         {
-            if (DataContext is Order order)
+            if (GetCurrentDrink() is JurassicJava j)
             {
-                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink)
-                {
-                    if (drink is JurassicJava j)
-                    {
-                        j.RoomForCream = !j.RoomForCream;
-                        UpdateSpecialButtons();
-                    }
-                }
+                j.RoomForCream = !j.RoomForCream;
+                UpdateSpecialButtons();
             }
         }
 
@@ -292,24 +253,58 @@ namespace PointOfSale
         /// </summary>
         public void ToggleDecaf(object sender, RoutedEventArgs args)
         {
-            if (DataContext is Order order)
+            if (GetCurrentDrink() is JurassicJava j)
             {
-                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Drink drink)
-                {
-                    if (drink is JurassicJava j)
-                    {
-                        j.Decaf = !j.Decaf;
-                        UpdateSpecialButtons();
-                    }
-                }
+                j.Decaf = !j.Decaf;
+                UpdateSpecialButtons();
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Callback for the done button being clicked
+        /// </summary>
+        private void DoneButton_Click(object sender, RoutedEventArgs e)
         {
             if (NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
+            }
+        }
+
+        /// <summary>
+        /// Gets the drink (in a combo or not) the user has selected in the order, or null if one is not found
+        /// </summary>
+        /// <returns>the drink (in a combo or not) the user has selected in the order, or null if one is not found</returns>
+        protected Drink GetCurrentDrink()
+        {
+            if (DataContext is Order order)
+            {
+                if (!ModifyingCombo)
+                    return CollectionViewSource.GetDefaultView(order.Items).CurrentItem as Drink;
+                else
+                    return (CollectionViewSource.GetDefaultView(order.Items).CurrentItem as CretaceousCombo)?.Drink;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Callback for when a drink is selected. Either adds a new drink or sets the combo's drink.
+        /// </summary>
+        /// <param name="item">A new instance of the selected drink</param>
+        protected void DrinkSelected(Drink item)
+        {
+            if (DataContext is Order order)
+            {
+                if (!ModifyingCombo)
+                {
+                    order.Items.Add(item);
+                    CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
+                }
+                else if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is CretaceousCombo combo)
+                {
+                    combo.Drink = item;
+                }
             }
         }
     }

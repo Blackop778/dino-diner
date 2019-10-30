@@ -31,15 +31,24 @@ namespace PointOfSale
         /// The available items in the menu
         /// </summary>
         public static DinoDiner.Menu.Menu menu = new DinoDiner.Menu.Menu();
-        /// <summary>
-        /// The current order
-        /// </summary>
-        // public static Order order = new Order();
 
         public MainWindow()
         {
             InitializeComponent();
             orderControl.itemsList.SelectionChanged += ItemsList_SelectionChanged;
+            frame.Navigating += Frame_Navigating;
+        }
+
+        private void Frame_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            if (frame.Content is CustomizeCombo oldComboPage)
+            {
+
+            }
+            else if (e.Content is CustomizeCombo newComboPage)
+            {
+                Console.WriteLine("yay");
+            }
         }
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -47,6 +56,28 @@ namespace PointOfSale
             if (frame.Content is DrinkSelection d)
             {
                 d.UpdateSpecialButtons();
+            }
+            else if (frame.Content is CustomizeCombo comboPage)
+            {
+                if (e.RemovedItems != null)
+                {
+                    foreach (IOrderItem item in e.RemovedItems)
+                    {
+                        if (item is CretaceousCombo combo)
+                            combo.PropertyChanged -= comboPage.UpdateDrinkSideButtons;
+                    }
+                }
+
+                comboPage.UpdateDrinkSideButtons(null, null);
+
+                if (e.AddedItems != null)
+                {
+                    foreach (IOrderItem item in e.AddedItems)
+                    {
+                        if (item is CretaceousCombo combo)
+                            combo.PropertyChanged += comboPage.UpdateDrinkSideButtons;
+                    }
+                }
             }
         }
 

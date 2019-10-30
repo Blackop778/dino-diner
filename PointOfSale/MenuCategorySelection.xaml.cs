@@ -50,7 +50,7 @@ namespace PointOfSale
         /// </summary>
         public void SelectDrink(object sender, RoutedEventArgs args)
         {
-            NavigationService.Navigate(new DrinkSelection(AddItemToOrder, null));
+            NavigationService.Navigate(new DrinkSelection(false));
         }
 
         /// <summary>
@@ -58,19 +58,7 @@ namespace PointOfSale
         /// </summary>
         public void SelectSide(object sender, RoutedEventArgs args)
         {
-            NavigationService.Navigate(new SideSelection(AddItemToOrder, null));
-        }
-
-        /// <summary>
-        /// Callback for the drink and side selection pages
-        /// </summary>
-        public void AddItemToOrder(IOrderItem item)
-        {
-            if (DataContext is Order order)
-            {
-                order.Items.Add(item);
-                CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
-            }
+            NavigationService.Navigate(new SideSelection(false));
         }
     }
 }

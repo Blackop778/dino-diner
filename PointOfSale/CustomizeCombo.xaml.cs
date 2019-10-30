@@ -21,39 +21,36 @@ using DinoDiner.Menu;
 namespace PointOfSale
 {
     /// <summary>
-    /// Interaction logic for CustomizeCombo.xaml
+    /// Interaction logic for CustomizeCombo.xaml. Note there is a bunch of logic for updating the side and drink buttons in MainWindow.xaml.cs as well.
     /// </summary>
     public partial class CustomizeCombo : Page
     {
-        private CretaceousCombo combo;
-
-        public CustomizeCombo() : this(null) {}
-
-        public CustomizeCombo(CretaceousCombo combo)
+        /// <summary>
+        /// Creates a combo customization page
+        /// </summary>
+        public CustomizeCombo()
         {
-            this.combo = combo;
-            combo.PropertyChanged += UpdateDrinkSideButtons;
             InitializeComponent();
             smallButton.Tag = DinoDiner.Menu.Size.Small;
             mediumButton.Tag = DinoDiner.Menu.Size.Medium;
             largeButton.Tag = DinoDiner.Menu.Size.Large;
+            // The constructor is called before the DataContext is set so we can't get the currently selected combo yet
+            DataContextChanged += CustomizeCombo_DataContextChanged;
+        }
+
+        /// <summary>
+        /// Once the DataContext is set update the current side and drink buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CustomizeCombo_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
             UpdateDrinkSideButtons(null, null);
-        }
-
-        /// <summary>
-        /// Callback for the side selection page
-        /// </summary>
-        public void SideSelectionCallback(Side side)
-        {
-            combo.Side = side;
-        }
-
-        /// <summary>
-        /// Callback for the drink selection page
-        /// </summary>
-        public void DrinkSelectionCallback(Drink drink)
-        {
-            combo.Drink = drink;
+            CretaceousCombo c = GetCurrentCombo();
+            if (c != null)
+            {
+                c.PropertyChanged += UpdateDrinkSideButtons;
+            }
         }
 
         /// <summary>
@@ -61,7 +58,7 @@ namespace PointOfSale
         /// </summary>
         public void SideClicked(object sender, RoutedEventArgs args)
         {
-            NavigationService.Navigate(new SideSelection(SideSelectionCallback, combo.Side));
+            NavigationService.Navigate(new SideSelection(true));
         }
 
         /// <summary>
@@ -69,7 +66,7 @@ namespace PointOfSale
         /// </summary>
         public void DrinkClicked(object sender, RoutedEventArgs args)
         {
-            NavigationService.Navigate(new DrinkSelection(DrinkSelectionCallback, combo.Drink));
+            NavigationService.Navigate(new DrinkSelection(true));
         }
 
         /// <summary>
@@ -77,7 +74,7 @@ namespace PointOfSale
         /// </summary>
         public void SizeClicked(object sender, RoutedEventArgs args)
         {
-            combo.Size = (DinoDiner.Menu.Size) (sender as Button).Tag;
+            GetCurrentCombo().Size = (DinoDiner.Menu.Size) (sender as Button).Tag;
         }
 
         /// <summary>
@@ -85,8 +82,26 @@ namespace PointOfSale
         /// </summary>
         public void UpdateDrinkSideButtons(object sender, PropertyChangedEventArgs args)
         {
-            sideButton.Content = combo.Side.BaseName();
-            drinkButton.Content = combo.Drink.BaseName();
+            CretaceousCombo combo = GetCurrentCombo();
+            if (combo != null)
+            {
+                sideButton.Content = combo.Side.BaseName();
+                drinkButton.Content = combo.Drink.BaseName();
+            }
+        }
+
+        /// <summary>
+        /// Gets the order's currently selected combo, or null if one is not found
+        /// </summary>
+        /// <returns>the order's currently selected combo, or null if one is not found</returns>
+        protected CretaceousCombo GetCurrentCombo()
+        {
+            if (DataContext is Order order)
+            {
+                return CollectionViewSource.GetDefaultView(order.Items).CurrentItem as CretaceousCombo;
+            }
+
+            return null;
         }
     }
 }
