@@ -48,8 +48,8 @@ namespace PointOfSale
             {
                 CretaceousCombo c = ((sender as Button).Tag as IOrderItem).Clone() as CretaceousCombo;
                 order.Items.Add(c);
-                NavigationService.Navigate(new CustomizeCombo(c));
                 CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
+                NavigationService.Navigate(new CustomizeCombo());
             }
         }
     }

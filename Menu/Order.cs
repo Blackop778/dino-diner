@@ -101,11 +101,17 @@ namespace DinoDiner.Menu
             OnStuffInItemsChanged();
         }
 
+        /// <summary>
+        /// Attached to the PropertyChanged event listeners for items in Items
+        /// </summary>
         private void OnThingInItemsPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnStuffInItemsChanged();
         }
 
+        /// <summary>
+        /// Notifies that this' prices have changed
+        /// </summary>
         private void OnStuffInItemsChanged()
         {
             NotifyPropertyChanged("SubtotalCost");

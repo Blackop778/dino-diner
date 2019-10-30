@@ -25,25 +25,23 @@ namespace PointOfSale
     /// </summary>
     public partial class SideSelection : Page
     {
-        // The drink the page has selected
-        private Side side;
-        public Action<Side> Callback { get; set; }
+        /// <summary>
+        /// Whether or not this page is modifying a combo
+        /// </summary>
+        public bool ModifyingCombo { get; set; }
 
         /// <summary>
-        /// NOTE: DO NOT USE.
-        /// this constructor is required by xaml. It will not work.
+        /// Creates a side selection that does not modify a combo.
         /// </summary>
-        public SideSelection() : this(null, null) { }
+        public SideSelection() : this(false) { }
 
         /// <summary>
-        /// Creates a side selection page. Lets the user choose the size.
+        /// Creates a side selection page that may or may not be modifying a combo.
         /// </summary>
-        /// <param name="callback">Gets called with the pages instance of the side when a new side is added to the order</param>
-        /// <param name="side">A side for the page to start with, can be null</param>
-        public SideSelection(Action<Side> callback, Side side)
+        /// <param name="ModifyingCombo">Whether or not this page is modifying a combo</param>
+        public SideSelection(bool ModifyingCombo)
         {
-            this.side = side;
-            Callback = callback;
+            this.ModifyingCombo = ModifyingCombo;
             InitializeComponent();
             foreach (Side s in MainWindow.menu.AvailableSides)
             {
@@ -66,8 +64,7 @@ namespace PointOfSale
         /// </summary>
         public void SideClicked(object sender, RoutedEventArgs args)
         {
-            side = ((sender as Button).Tag as Side).Clone() as Side;
-            Callback(side);
+            SideSelected(((sender as Button).Tag as Side).Clone() as Side);
         }
 
         /// <summary>
@@ -75,16 +72,51 @@ namespace PointOfSale
         /// </summary>
         public void SizeClicked(object sender, RoutedEventArgs args)
         {
+            Side side = GetCurrentSide();
+            if (side != null)
+            {
+                side.Size = (Size)(sender as Button).Tag;
+
+                if (NavigationService.CanGoBack)
+                {
+                    NavigationService.GoBack();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the side (in a combo or not) the user has selected in the order, or null if one is not found
+        /// </summary>
+        /// <returns>the side (in a combo or not) the user has selected in the order, or null if one is not found</returns>
+        protected Side GetCurrentSide()
+        {
             if (DataContext is Order order)
             {
-                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is Side side)
-                {
-                    side.Size = (Size)(sender as Button).Tag;
+                if (!ModifyingCombo)
+                    return CollectionViewSource.GetDefaultView(order.Items).CurrentItem as Side;
+                else
+                    return (CollectionViewSource.GetDefaultView(order.Items).CurrentItem as CretaceousCombo)?.Side;
+            }
 
-                    if (NavigationService.CanGoBack)
-                    {
-                        NavigationService.GoBack();
-                    }
+            return null;
+        }
+
+        /// <summary>
+        /// Callback for when a side is selected. Either adds a new side or sets the combo's side.
+        /// </summary>
+        /// <param name="item">A new instance of the selected side</param>
+        protected void SideSelected(Side item)
+        {
+            if (DataContext is Order order)
+            {
+                if (!ModifyingCombo)
+                {
+                    order.Items.Add(item);
+                    CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
+                }
+                else if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is CretaceousCombo combo)
+                {
+                    combo.Side = item;
                 }
             }
         }
