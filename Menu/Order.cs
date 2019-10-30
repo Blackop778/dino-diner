@@ -117,6 +117,17 @@ namespace DinoDiner.Menu
             NotifyPropertyChanged("SubtotalCost");
             NotifyPropertyChanged("SalesTaxCost");
             NotifyPropertyChanged("TotalCost");
+            NotifyPropertyChanged("Items");
+        }
+
+        public void Add(IOrderItem item)
+        {
+            Items.Add(item);
+        }
+
+        public void Remove(IOrderItem item)
+        {
+            Items.Remove(item);
         }
     }
 }

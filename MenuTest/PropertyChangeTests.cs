@@ -23,6 +23,11 @@ namespace MenuTest
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SalesTaxCost"));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalCost"));
         }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 
     /// <summary>
