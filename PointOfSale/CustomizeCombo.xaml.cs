@@ -45,12 +45,8 @@ namespace PointOfSale
         /// <param name="e"></param>
         private void CustomizeCombo_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            UpdateDrinkSideButtons(null, null);
-            CretaceousCombo c = GetCurrentCombo();
-            if (c != null)
-            {
-                c.PropertyChanged += UpdateDrinkSideButtons;
-            }
+            UpdateButtonLabels(null, null);
+            // Don't add UpdateButtonLabels to any event listeners because that is handled in MainWindow.xaml.cs
         }
 
         /// <summary>
@@ -70,23 +66,41 @@ namespace PointOfSale
         }
 
         /// <summary>
+        /// Button to customize the entree is clicked
+        /// </summary>
+        public void EntreeClicked(object sender, RoutedEventArgs args)
+        {
+            Page p = EntreeSelection.GetCustomizationPage(GetCurrentCombo().Entree);
+            if (p != null)
+            {
+                NavigationService.Navigate(p);
+            }
+        }
+
+
+        /// <summary>
         /// Button to customize the side is clicked
         /// </summary>
         public void SizeClicked(object sender, RoutedEventArgs args)
         {
-            GetCurrentCombo().Size = (DinoDiner.Menu.Size) (sender as Button).Tag;
+            CretaceousCombo combo = GetCurrentCombo();
+            if (combo != null)
+            {
+                combo.Size = (DinoDiner.Menu.Size)(sender as Button).Tag;
+            }
         }
 
         /// <summary>
         /// Updates the displayed names of the combo's side and drink
         /// </summary>
-        public void UpdateDrinkSideButtons(object sender, PropertyChangedEventArgs args)
+        public void UpdateButtonLabels(object sender, PropertyChangedEventArgs args)
         {
             CretaceousCombo combo = GetCurrentCombo();
             if (combo != null)
             {
                 sideButton.Content = combo.Side.BaseName();
                 drinkButton.Content = combo.Drink.BaseName();
+                entreeButton.Content = combo.Entree.ToString();
             }
         }
 

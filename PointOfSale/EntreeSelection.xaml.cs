@@ -49,10 +49,50 @@ namespace PointOfSale
                 order.Items.Add(((sender as Button).Tag as IOrderItem).Clone() as IOrderItem);
                 CollectionViewSource.GetDefaultView(order.Items).MoveCurrentToLast();
             }
-            if (NavigationService.CanGoBack)
+
+            Page customizationPage = GetCustomizationPage((sender as Button).Tag as Entree);
+            if (customizationPage != null)
+            {
+                NavigationService.Navigate(customizationPage);
+            }
+            else if (NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
             }
+        }
+
+        internal static Page GetCustomizationPage(Entree e)
+        {
+            if (e is Brontowurst)
+                return new CustomizeBrontowurst();
+            else if (e is DinoNuggets)
+                return new CustomizeDinoNuggets();
+            else if (e is PrehistoricPBJ)
+                return new CustomizePrehistoricPBJ();
+            else if (e is SteakosaurusBurger)
+                return new CustomizeSteakosaurusBurger();
+            else if (e is TRexKingBurger)
+                return new CustomizeTRexKingBurger();
+            else if (e is VelociWrap)
+                return new CustomizeVelociWrap();
+            else
+                return null;
+        }
+
+        /// <summary>
+        /// Gets the entree (in a combo or not) the user has selected in the order, or null if one is not found
+        /// </summary>
+        /// <returns>the entree (in a combo or not) the user has selected in the order, or null if one is not found</returns>
+        internal static Entree GetCurrentEntree(FrameworkElement e)
+        {
+            if (e.DataContext is Order order)
+            {
+                if (CollectionViewSource.GetDefaultView(order.Items).CurrentItem is CretaceousCombo c)
+                    return c.Entree;
+                return CollectionViewSource.GetDefaultView(order.Items).CurrentItem as Entree;
+            }
+
+            return null;
         }
     }
 }

@@ -23,7 +23,7 @@
                  Background="Transparent" BorderThickness="0" IsSynchronizedWithCurrentItem="True" Name="itemsList">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid MinWidth="185">
+                    <Grid MinWidth="170">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="20"/>

@@ -36,19 +36,6 @@ namespace PointOfSale
         {
             InitializeComponent();
             orderControl.itemsList.SelectionChanged += ItemsList_SelectionChanged;
-            frame.Navigating += Frame_Navigating;
-        }
-
-        private void Frame_Navigating(object sender, NavigatingCancelEventArgs e)
-        {
-            if (frame.Content is CustomizeCombo oldComboPage)
-            {
-
-            }
-            else if (e.Content is CustomizeCombo newComboPage)
-            {
-                Console.WriteLine("yay");
-            }
         }
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -64,18 +51,18 @@ namespace PointOfSale
                     foreach (IOrderItem item in e.RemovedItems)
                     {
                         if (item is CretaceousCombo combo)
-                            combo.PropertyChanged -= comboPage.UpdateDrinkSideButtons;
+                            combo.PropertyChanged -= comboPage.UpdateButtonLabels;
                     }
                 }
 
-                comboPage.UpdateDrinkSideButtons(null, null);
+                comboPage.UpdateButtonLabels(null, null);
 
                 if (e.AddedItems != null)
                 {
                     foreach (IOrderItem item in e.AddedItems)
                     {
                         if (item is CretaceousCombo combo)
-                            combo.PropertyChanged += comboPage.UpdateDrinkSideButtons;
+                            combo.PropertyChanged += comboPage.UpdateButtonLabels;
                     }
                 }
             }
