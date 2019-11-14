@@ -12,3 +12,35 @@ body {
     padding-right: 15px;
 }
 
+nav > ul {
+	list-style: none;
+}
+
+nav > ul > li {
+	margin-top: 5px;
+}
+
+img {
+	max-height: 500px
+}
+
+.menu-item-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.menu-item {
+	display: flex;
+	flex-direction: column;
+	margin-right: 15px;
+	padding: 5px;
+}
+
+.menu-item > p, .menu-item > h4, .menu-item > ul {
+	margin: 1px 0;
+}
+
+.menu-item > h3 {
+	margin-top: 0;
+}

@@ -1,0 +1,100 @@
+﻿@page
+@model Website.Pages.MenuModel
+@{
+	ViewData["Title"] = "Menu";
+}
+@using DinoDiner.Menu
+
+<h1>Menu</h1>
+
+<h2>Combos</h2>
+<div class="menu-item-container">
+	@foreach (CretaceousCombo c in Model.Menu.AvailableCombos)
+	{
+		<div class="menu-item">
+			<h3>@c.Description</h3>
+			<p>
+				Price: $@c.Price.ToString("0.00")
+			</p>
+			<p>
+				Calories: @c.Calories
+			</p>
+			<h4>Ingredients</h4>
+			<ul>
+				@foreach (string i in c.Ingredients)
+				{
+					<li>@i</li>
+				}
+			</ul>
+		</div>
+	}
+</div>
+
+<h2>Entrees</h2>
+<div class="menu-item-container">
+	@foreach (Entree e in Model.Menu.AvalibleEntrees)
+	{
+		<div class="menu-item">
+			<h3>@e.Description</h3>
+			<p>
+				Price: $@e.Price.ToString("0.00")
+			</p>
+			<p>
+				Calories: @e.Calories
+			</p>
+			<h4>Ingredients</h4>
+			<ul>
+				@foreach (string i in e.Ingredients)
+				{
+					<li>@i</li>
+				}
+			</ul>
+		</div>
+	}
+</div>
+
+<h2>Sides</h2>
+<div class="menu-item-container">
+	@foreach (Side s in Model.Menu.AvailableSides)
+	{
+		<div class="menu-item">
+			<h3>@s.Description</h3>
+			<p>
+				Price: $@s.Price.ToString("0.00")
+			</p>
+			<p>
+				Calories: @s.Calories
+			</p>
+			<h4>Ingredients</h4>
+			<ul>
+				@foreach (string i in s.Ingredients)
+				{
+					<li>@i</li>
+				}
+			</ul>
+		</div>
+	}
+</div>
+
+<h2>Drinks</h2>
+<div class="menu-item-container">
+	@foreach (Drink d in Model.Menu.AvailableDrinks)
+	{
+		<div class="menu-item">
+			<h3>@d.Description</h3>
+			<p>
+				Price: $@d.Price.ToString("0.00")
+			</p>
+			<p>
+				Calories: @d.Calories
+			</p>
+			<h4>Ingredients</h4>
+			<ul>
+				@foreach (string i in d.Ingredients)
+				{
+					<li>@i</li>
+				}
+			</ul>
+		</div>
+	}
+</div>
