@@ -10,10 +10,35 @@ namespace Website.Pages
 {
     public class MenuModel : PageModel
     {
-        public Menu Menu { get; protected set; }
+        public Menu Menu { get; protected set; } = new Menu();
+
+        // backing variables for the form values
+        [BindProperty]
+        public string Search { get; set; }
+        [BindProperty]
+        public List<string> MenuCategory { get; set; } = new List<string>();
+        [BindProperty]
+        public float? MinimumPrice { get; set; }
+        [BindProperty]
+        public float? MaximumPrice { get; set; }
+        [BindProperty]
+        public List<string> ExcludedIngredients { get; set; } = new List<string>();
+
         public void OnGet()
         {
-            Menu = new Menu();
+            
+        }
+
+        public void OnPost()
+        {
+            if (MenuCategory.Count > 0)
+                Menu.FilterCategories(MenuCategory);
+            if (Search != null)
+                Menu.FilterNames(Search);
+            if (MinimumPrice != null || MaximumPrice != null)
+                Menu.FilterPrices(MinimumPrice, MaximumPrice);
+            if (ExcludedIngredients.Count > 0)
+                Menu.FilterIngredients(ExcludedIngredients);
         }
     }
 }

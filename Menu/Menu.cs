@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DinoDiner.Menu
@@ -13,6 +14,9 @@ namespace DinoDiner.Menu
     /// </summary>
     public class Menu
     {
+        // backing variable
+        private HashSet<string> possibleIngredients;
+
         /// <summary>
         /// Creates a menu with all of the default menu items
         /// </summary>
@@ -76,6 +80,17 @@ namespace DinoDiner.Menu
         /// </summary>
         public List<CretaceousCombo> AvailableCombos { get; protected set; }
 
+        public HashSet<string> PossibleIngredients
+        {
+            get
+            {
+                if (possibleIngredients == null)
+                    possibleIngredients = ComputePossibleIngredients();
+
+                return possibleIngredients;
+            }
+        }
+
         /// <summary>
         /// Adds a menu item to the appropriate lists
         /// </summary>
@@ -130,6 +145,95 @@ namespace DinoDiner.Menu
                 sb.Length -= 2;
 
             return sb.ToString();
+        }
+
+        protected HashSet<string> ComputePossibleIngredients()
+        {
+            HashSet<string> set = new HashSet<string>();
+
+            foreach (IMenuItem menuItem in AvalibleMenuItems)
+            {
+                foreach (string ingredient in menuItem.Ingredients)
+                {
+                    set.Add(ingredient);
+                }
+            }
+
+            return set;
+        }
+
+        /// <summary>
+        /// Filters the currently available menu items to only items within the given categories
+        /// </summary>
+        public void FilterCategories(List<string> categories)
+        {
+            bool combos = categories.Contains("Combo");
+            bool entrees = categories.Contains("Entree");
+            bool sides = categories.Contains("Side");
+            bool drinks = categories.Contains("Drink");
+
+            for (int i = 0; i < AvalibleMenuItems.Count; i += 1)
+            {
+                IMenuItem menuItem = AvalibleMenuItems[i];
+                // If the item is not in one of the included categories remove it
+                if (!(combos && menuItem is CretaceousCombo) &&
+                    !(entrees && menuItem is Entree) &&
+                    !(sides && menuItem is Side) &&
+                    !(drinks &&menuItem is Drink))
+                {
+                    RemoveItem(menuItem);
+                    i -= 1;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Filters the currently available menu items to only ones containing the given string
+        /// </summary>
+        public void FilterNames(string toInclude)
+        {
+            for (int i = 0; i < AvalibleMenuItems.Count; i += 1)
+            {
+                IMenuItem menuItem = AvalibleMenuItems[i];
+                // if it doesn't contain the toInclude string
+                if (menuItem.ToString().IndexOf(toInclude, StringComparison.OrdinalIgnoreCase) == -1) {
+                    RemoveItem(menuItem);
+                    i -= 1;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Filters the currently available menu items to only ones inside the given price bounds (inclusive)
+        /// </summary>
+        public void FilterPrices(float? min, float? max)
+        {
+            for (int i = 0; i < AvalibleMenuItems.Count; i += 1)
+            {
+                IMenuItem menuItem = AvalibleMenuItems[i];
+                if ((min != null && menuItem.Price < min) || (max != null && menuItem.Price > max))
+                {
+                    RemoveItem(menuItem);
+                    i -= 1;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Filters the currently available menu items to only ones that include none of the excluded ingredients
+        /// </summary>
+        public void FilterIngredients(List<string> excludedIngredients)
+        {
+            for (int i = 0; i < AvalibleMenuItems.Count; i += 1)
+            {
+                IMenuItem menuItem = AvalibleMenuItems[i];
+                // If the intersection of the item's ingredients and the banned ingredients is not empty
+                if (menuItem.Ingredients.Intersect(excludedIngredients).Any())
+                {
+                    RemoveItem(menuItem);
+                    i -= 1;
+                }
+            }
         }
     }
 }

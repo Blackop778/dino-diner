@@ -24,6 +24,10 @@ img {
 	max-height: 500px
 }
 
+.menu-container {
+    flex-basis: 100%;
+}
+
 .menu-item-container {
 	display: flex;
 	flex-direction: row;
@@ -43,4 +47,14 @@ img {
 
 .menu-item > h3 {
 	margin-top: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
 }
